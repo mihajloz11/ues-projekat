@@ -1,0 +1,23 @@
+{
+  "started_utc": "2026-06-27T10:34:09.711+00:00",
+  "port": "COM3",
+  "baud": 921600,
+  "label": "empty_room",
+  "protocol": "plain",
+  "raw_log": "data\\raw\\empty_room\\20260627_123349\\raw_serial.log",
+  "jsonl": "data\\raw\\empty_room\\20260627_123349\\records.jsonl",
+  "notes": "Guided protocol capture. ts_mono is monotonic host seconds; phases carry breathing ground truth.",
+  "phases": [
+    {
+      "name": "capture",
+      "target_bpm": null,
+      "start_mono": 0.015,
+      "start_utc": "2026-06-27T10:34:09.714+00:00",
+      "end_utc": "2026-06-27T10:37:09.707+00:00"
+    }
+  ],
+  "ended_utc": "2026-06-27T10:37:09.707+00:00",
+  "lines": 10102,
+  "csi_frames": 7873,
+  "effective_fps": 43.7
+}

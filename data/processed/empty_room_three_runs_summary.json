@@ -1,0 +1,41 @@
+[
+  {
+    "session": "empty_room_run1_20260518_225758",
+    "folder": "data\\raw\\empty_room\\empty_room_run1_20260518_225758",
+    "records": 9054,
+    "csi_records": 4271,
+    "csi_lengths": [
+      0,
+      384
+    ],
+    "amp_mean_abs_avg": 14.378,
+    "started_utc": "2026-05-18T20:58:18+00:00",
+    "ended_utc": "2026-05-18T21:03:18+00:00"
+  },
+  {
+    "session": "empty_room_run2_20260518_230339",
+    "folder": "data\\raw\\empty_room\\empty_room_run2_20260518_230339",
+    "records": 8411,
+    "csi_records": 3942,
+    "csi_lengths": [
+      0,
+      384
+    ],
+    "amp_mean_abs_avg": 17.6625,
+    "started_utc": "2026-05-18T21:03:39+00:00",
+    "ended_utc": "2026-05-18T21:08:39+00:00"
+  },
+  {
+    "session": "empty_room_run3_20260518_230858",
+    "folder": "data\\raw\\empty_room\\empty_room_run3_20260518_230858",
+    "records": 8391,
+    "csi_records": 3928,
+    "csi_lengths": [
+      0,
+      384
+    ],
+    "amp_mean_abs_avg": 17.7238,
+    "started_utc": "2026-05-18T21:08:59+00:00",
+    "ended_utc": "2026-05-18T21:13:59+00:00"
+  }
+]

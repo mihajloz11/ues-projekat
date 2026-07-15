@@ -1,0 +1,3 @@
+## manifest za ESP-IDF Component Manager
+dependencies:
+  idf: ">=4.4.1"

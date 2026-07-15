@@ -1,0 +1,9 @@
+numpy
+pandas
+pyserial
+paho-mqtt
+matplotlib
+scipy
+statsmodels
+pyqtgraph
+PyQt5

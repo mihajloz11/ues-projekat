@@ -1,0 +1,24 @@
+{
+  "session": "person_present_or_moving_5min_20260519_212030",
+  "folder": "data\\raw\\person_present_or_moving\\person_present_or_moving_5min_20260519_212030",
+  "records": 10347,
+  "csi_records": 4645,
+  "csi_lengths": [
+    0,
+    384
+  ],
+  "raw_bytes": 6257900,
+  "jsonl_bytes": 9002128,
+  "amp_mean_abs_avg": 6.5593,
+  "metadata": {
+    "started_utc": "2026-05-19T19:20:30+00:00",
+    "port": "COM3",
+    "baud": 921600,
+    "label": "person_present_or_moving",
+    "raw_log": "data\\raw\\person_present_or_moving\\person_present_or_moving_5min_20260519_212030\\raw_serial.log",
+    "jsonl": "data\\raw\\person_present_or_moving\\person_present_or_moving_5min_20260519_212030\\records.jsonl",
+    "notes": "CSI receiver session. Keep hardware layout and room state stable during capture.",
+    "ended_utc": "2026-05-19T19:25:30+00:00",
+    "lines": 10347
+  }
+}

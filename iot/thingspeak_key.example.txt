@@ -1,0 +1,3 @@
+# ThingSpeak WRITE API Key for local demos.
+# Copy to iot/thingspeak_key.local.txt and put the key on the next line.
+# Do not send the .local.txt file publicly.

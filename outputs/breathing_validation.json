@@ -1,0 +1,68 @@
+{
+  "session": "data\\raw\\person_still\\20260627_122318",
+  "phases": [
+    {
+      "phase": "settle",
+      "target_bpm": null,
+      "fft_bpm": 9.2,
+      "fft_snr": 69.3,
+      "acf": 0.5,
+      "acf_bpm": 6.5,
+      "frames": 853
+    },
+    {
+      "phase": "natural",
+      "target_bpm": null,
+      "fft_bpm": 11.1,
+      "fft_snr": 24.5,
+      "acf": 0.341,
+      "acf_bpm": 8.6,
+      "frames": 3079
+    },
+    {
+      "phase": "metronome_12bpm",
+      "target_bpm": 12,
+      "fft_bpm": 17.0,
+      "fft_snr": 21.9,
+      "acf": 0.362,
+      "acf_bpm": 7.5,
+      "frames": 2663
+    },
+    {
+      "phase": "metronome_15bpm",
+      "target_bpm": 15,
+      "fft_bpm": 24.0,
+      "fft_snr": 23.5,
+      "acf": 0.456,
+      "acf_bpm": 6.4,
+      "frames": 2666
+    },
+    {
+      "phase": "metronome_20bpm",
+      "target_bpm": 20,
+      "fft_bpm": 16.0,
+      "fft_snr": 16.1,
+      "acf": 0.319,
+      "acf_bpm": 6.0,
+      "frames": 2643
+    },
+    {
+      "phase": "breath_hold_apnea",
+      "target_bpm": 0,
+      "fft_bpm": 18.0,
+      "fft_snr": 14.6,
+      "acf": 0.537,
+      "acf_bpm": 8.7,
+      "frames": 883
+    },
+    {
+      "phase": "natural_recover",
+      "target_bpm": null,
+      "fft_bpm": 15.6,
+      "fft_snr": 24.9,
+      "acf": 0.296,
+      "acf_bpm": 7.1,
+      "frames": 2147
+    }
+  ]
+}

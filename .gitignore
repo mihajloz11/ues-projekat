@@ -1,0 +1,48 @@
+# local secrets and machine-specific configuration
+.env
+*.local
+firmware/baseline/csi_recv/main/app_net_config_local.h
+iot/thingspeak_key.local.txt
+iot/thingspeak_key.txt
+
+# Python environments and caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# ESP-IDF toolchains and generated build files
+tools/
+repos/
+build/
+firmware/**/build/
+firmware/**/managed_components/
+firmware/**/sdkconfig
+firmware/**/sdkconfig.old
+
+# Node-RED runtime files
+iot/node_red_userdir/node_modules/
+iot/node_red_userdir/.config.*.json
+iot/node_red_userdir/lib/
+
+# live IoT state
+iot/latest_state.json
+iot/room_state.sqlite
+iot/state_history.jsonl
+iot/archive/
+*.sqlite
+*.sqlite-*
+
+# generated caches and duplicate working datasets
+data/cache/
+data/_today/
+data/_session_*/
+
+# temporary files and logs
+logs/
+*.log
+!data/raw/**/*.log
+*.tmp
+~$*
+.DS_Store
+Thumbs.db

@@ -1,0 +1,11 @@
+{
+  "started_utc": "2026-06-18T19:54:15+00:00",
+  "port": "COM3",
+  "baud": 921600,
+  "label": "walking",
+  "raw_log": "data\\raw\\walking\\20260618_215415\\raw_serial.log",
+  "jsonl": "data\\raw\\walking\\20260618_215415\\records.jsonl",
+  "notes": "CSI receiver session. Keep hardware layout and room state stable during capture.",
+  "ended_utc": "2026-06-18T19:59:15+00:00",
+  "lines": 22114
+}

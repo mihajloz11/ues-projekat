@@ -1,0 +1,11 @@
+{
+  "started_utc": "2026-06-03T10:22:42+00:00",
+  "port": "COM3",
+  "baud": 921600,
+  "label": "zone_middle",
+  "raw_log": "data\\raw\\zone_middle\\zone_middle_extra_5min_20260603_122242\\raw_serial.log",
+  "jsonl": "data\\raw\\zone_middle\\zone_middle_extra_5min_20260603_122242\\records.jsonl",
+  "notes": "CSI receiver session. Keep hardware layout and room state stable during capture.",
+  "ended_utc": "2026-06-03T10:27:42+00:00",
+  "lines": 2690
+}

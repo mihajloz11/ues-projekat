@@ -1,0 +1,65 @@
+{
+  "started_utc": "2026-06-27T10:23:30.661+00:00",
+  "port": "COM3",
+  "baud": 921600,
+  "label": "person_still",
+  "protocol": "breathing",
+  "raw_log": "data\\raw\\person_still\\20260627_122318\\raw_serial.log",
+  "jsonl": "data\\raw\\person_still\\20260627_122318\\records.jsonl",
+  "notes": "Guided protocol capture. ts_mono is monotonic host seconds; phases carry breathing ground truth.",
+  "phases": [
+    {
+      "name": "settle",
+      "target_bpm": null,
+      "start_mono": 0.032,
+      "start_utc": "2026-06-27T10:23:30.709+00:00",
+      "end_utc": "2026-06-27T10:29:10.689+00:00"
+    },
+    {
+      "name": "natural",
+      "target_bpm": null,
+      "start_mono": 20.0,
+      "start_utc": "2026-06-27T10:23:50.675+00:00",
+      "end_utc": "2026-06-27T10:29:10.689+00:00"
+    },
+    {
+      "name": "metronome_12bpm",
+      "target_bpm": 12,
+      "start_mono": 90.0,
+      "start_utc": "2026-06-27T10:25:00.667+00:00",
+      "end_utc": "2026-06-27T10:29:10.689+00:00"
+    },
+    {
+      "name": "metronome_15bpm",
+      "target_bpm": 15,
+      "start_mono": 150.0,
+      "start_utc": "2026-06-27T10:26:00.669+00:00",
+      "end_utc": "2026-06-27T10:29:10.689+00:00"
+    },
+    {
+      "name": "metronome_20bpm",
+      "target_bpm": 20,
+      "start_mono": 210.0,
+      "start_utc": "2026-06-27T10:27:00.666+00:00",
+      "end_utc": "2026-06-27T10:29:10.689+00:00"
+    },
+    {
+      "name": "breath_hold_apnea",
+      "target_bpm": 0,
+      "start_mono": 270.0,
+      "start_utc": "2026-06-27T10:28:00.676+00:00",
+      "end_utc": "2026-06-27T10:29:10.689+00:00"
+    },
+    {
+      "name": "natural_recover",
+      "target_bpm": null,
+      "start_mono": 290.0,
+      "start_utc": "2026-06-27T10:28:20.674+00:00",
+      "end_utc": "2026-06-27T10:29:10.689+00:00"
+    }
+  ],
+  "ended_utc": "2026-06-27T10:29:10.689+00:00",
+  "lines": 19183,
+  "csi_frames": 15010,
+  "effective_fps": 44.1
+}

@@ -1,0 +1,32 @@
+{
+  "empty_records": "data/_session_0623/empty_room/20260623_224713/records.jsonl",
+  "scales": [
+    1.0,
+    1.5,
+    2.0,
+    3.0,
+    4.0
+  ],
+  "models": {
+    "models/_drift_baseline.json": {
+      "feature_norm": "none",
+      "empty_fraction_by_scale": {
+        "1.0": 0.998776758409786,
+        "1.5": 0.0,
+        "2.0": 0.0,
+        "3.0": 0.0,
+        "4.0": 0.0
+      }
+    },
+    "models/_drift_norm.json": {
+      "feature_norm": "window_mean",
+      "empty_fraction_by_scale": {
+        "1.0": 0.998776758409786,
+        "1.5": 0.998776758409786,
+        "2.0": 0.998776758409786,
+        "3.0": 0.998776758409786,
+        "4.0": 0.998776758409786
+      }
+    }
+  }
+}

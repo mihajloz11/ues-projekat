@@ -1,0 +1,10 @@
+{
+  "still": {
+    "mean_votes": 119.9,
+    "mean_spread": 4.25
+  },
+  "empty": {
+    "mean_votes": 130.2391304347826,
+    "mean_spread": 4.47391304347826
+  }
+}

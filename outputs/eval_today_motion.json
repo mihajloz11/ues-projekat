@@ -1,0 +1,64 @@
+{
+  "method": "chronological_holdout",
+  "multiclass": true,
+  "train_frac": 0.75,
+  "window_size": 8,
+  "hop": 2,
+  "hidden_size": 32,
+  "epochs": 120,
+  "output_labels": [
+    "person_still",
+    "walking"
+  ],
+  "train_windows": 8564,
+  "test_windows": 2856,
+  "binary_accuracy": 0.9874,
+  "per_class": {
+    "person_still": {
+      "precision": 0.9781,
+      "recall": 0.9972,
+      "f1": 0.9876
+    },
+    "walking": {
+      "precision": 0.9971,
+      "recall": 0.9775,
+      "f1": 0.9872
+    }
+  },
+  "confusion": {
+    "person_still": {
+      "person_still": 1430,
+      "walking": 4
+    },
+    "walking": {
+      "walking": 1390,
+      "person_still": 32
+    }
+  },
+  "per_source_label": {
+    "person_still": {
+      "test_windows": 1434,
+      "detected": 0.9972
+    },
+    "walking": {
+      "test_windows": 1422,
+      "detected": 0.9775
+    }
+  },
+  "sessions": [
+    {
+      "label": "person_still",
+      "session": "20260618_214534",
+      "windows": 5735,
+      "train": 4301,
+      "test": 1434
+    },
+    {
+      "label": "walking",
+      "session": "20260618_215415",
+      "windows": 5685,
+      "train": 4263,
+      "test": 1422
+    }
+  ]
+}

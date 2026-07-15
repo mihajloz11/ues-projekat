@@ -1,0 +1,770 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="data:," />
+  <title>WiFi CSI TinyML IoT</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #0f1419;
+      color: #eef3f8;
+      --panel: #171d24;
+      --line: #2d3844;
+      --muted: #9facb9;
+      --blue: #3b82f6;
+      --red: #ef4444;
+      --orange: #f97316;
+      --green: #22c55e;
+      --yellow: #eab308;
+      --cyan: #22d3ee;
+      --purple: #a78bfa;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 18px; background: #0f1419; }
+    main { max-width: 1180px; margin: 0 auto; }
+    header { display: flex; align-items: end; justify-content: space-between; gap: 14px; margin-bottom: 12px; }
+    h1 { margin: 0; font-size: 24px; line-height: 1.1; letter-spacing: 0; }
+    .stamp { color: var(--muted); font-size: 12px; text-align: right; }
+    .status-strip {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .chip {
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #141b23;
+      padding: 7px 10px;
+      color: #dce7f2;
+      font-size: 12px;
+      overflow: hidden;
+    }
+    .chip span:first-child { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .chip strong { font-size: 12px; text-align: right; overflow-wrap: anywhere; }
+    .chip.ok { border-color: rgba(34, 197, 94, .45); background: rgba(34, 197, 94, .08); }
+    .chip.warn { border-color: rgba(234, 179, 8, .55); background: rgba(234, 179, 8, .10); }
+    .chip.bad { border-color: rgba(239, 68, 68, .55); background: rgba(239, 68, 68, .10); }
+    .banner {
+      display: none;
+      border: 1px solid rgba(234, 179, 8, .55);
+      background: rgba(234, 179, 8, .12);
+      color: #fde68a;
+      border-radius: 8px;
+      padding: 9px 12px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+    .banner.visible { display: block; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .card {
+      min-width: 0;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 10px 12px;
+      min-height: 72px;
+    }
+    .label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
+    .value { margin-top: 7px; font-size: 22px; font-weight: 700; overflow-wrap: anywhere; }
+    .sub { margin-top: 5px; color: #b8c3cf; font-size: 12px; overflow-wrap: anywhere; }
+    .value.ok { color: #bbf7d0; }
+    .value.warn { color: #fde68a; }
+    .value.bad { color: #fecaca; }
+    .meter {
+      width: 100%;
+      height: 7px;
+      margin-top: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #0b1117;
+      border: 1px solid #25313d;
+    }
+    .meter > div {
+      width: 0%;
+      height: 100%;
+      background: var(--green);
+      transition: width .25s ease, background .25s ease;
+    }
+    .meter.warn > div { background: var(--yellow); }
+    .meter.bad > div { background: var(--red); }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr);
+      gap: 12px;
+      align-items: start;
+    }
+
+    .room-card, .side {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .room-card {
+      display: grid;
+      gap: 10px;
+    }
+    .room-head { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 8px; color: var(--muted); font-size: 12px; }
+    .room {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 400 / 210;
+      max-height: 430px;
+      border: 2px solid #d9e2ec;
+      background: #111922;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .item, .zone, .node, .door, .link {
+      position: absolute;
+    }
+    .item {
+      border: 2px solid var(--orange);
+      color: #ffd7ad;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.15;
+      padding: 4px;
+      background: rgba(249, 115, 22, .06);
+    }
+    .heater { left: 3%; top: 7%; width: 22%; height: 25%; border-color: #e11d48; color: #fecdd3; }
+    .desk { left: 31%; top: 7%; width: 27%; height: 22%; }
+    .bed { left: 76%; top: 7%; width: 20%; height: 82%; }
+    .wardrobe { left: 32%; top: 69%; width: 39%; height: 24%; }
+    .door { left: 0; top: 44%; height: 28%; border-left: 4px solid #e11d48; }
+
+    .zone {
+      border: 2px solid var(--blue);
+      color: #d8e8ff;
+      background: rgba(59, 130, 246, .10);
+      display: flex;
+      align-items: end;
+      justify-content: center;
+      padding: 7px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .z1 { left: 4%; top: 36%; width: 24%; height: 50%; }
+    .z2 { left: 31%; top: 35%; width: 34%; height: 28%; }
+    .z3 { left: 73%; top: 35%; width: 24%; height: 52%; }
+    .zone.active {
+      border-color: var(--red);
+      background: rgba(239, 68, 68, .22);
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, .18) inset;
+      color: #fff;
+    }
+
+    .node {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--green);
+      box-shadow: 0 0 0 5px rgba(34, 197, 94, .18);
+      z-index: 5;
+    }
+    .node::after {
+      content: attr(data-label);
+      position: absolute;
+      left: 16px;
+      top: -4px;
+      min-width: 86px;
+      color: #d6f7df;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .rx { left: 45%; top: 16%; }
+    .tx { left: 84%; top: 56%; }
+    .link {
+      left: 47%;
+      top: 20%;
+      width: 43%;
+      height: 60%;
+      border-top: 2px dashed rgba(34,197,94,.55);
+      transform: rotate(38deg);
+      transform-origin: left center;
+      pointer-events: none;
+    }
+    .link.motion {
+      border-top-color: rgba(234, 179, 8, .95);
+      filter: drop-shadow(0 0 7px rgba(234, 179, 8, .45));
+    }
+    .link.strong {
+      border-top-color: rgba(239, 68, 68, .95);
+      filter: drop-shadow(0 0 9px rgba(239, 68, 68, .55));
+    }
+    .analytics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .plot {
+      border: 1px solid #26313c;
+      background: #121922;
+      border-radius: 8px;
+      padding: 9px;
+      min-width: 0;
+    }
+    .plot-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    canvas {
+      width: 100%;
+      height: 86px;
+      display: block;
+    }
+
+    .status-list {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .history-panel {
+      border-top: 1px solid #26313c;
+      padding-top: 10px;
+      margin-bottom: 10px;
+    }
+    .history-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 7px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .history-rows {
+      display: grid;
+      gap: 5px;
+      min-height: 28px;
+    }
+    .history-row {
+      display: grid;
+      grid-template-columns: 58px minmax(76px, 1fr) 42px 50px 54px 58px;
+      gap: 6px;
+      align-items: center;
+      border: 1px solid #26313c;
+      border-radius: 6px;
+      padding: 6px;
+      background: #121922;
+      font-size: 11px;
+      color: #d7e3ee;
+    }
+    .history-row span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .history-row .ok { color: #bbf7d0; }
+    .history-row .warn { color: #fde68a; }
+    .history-empty {
+      color: var(--muted);
+      font-size: 12px;
+      padding: 7px 0;
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #26313c;
+      font-size: 13px;
+    }
+    .row span:first-child { color: var(--muted); }
+    .row span:last-child { text-align: right; font-weight: 600; overflow-wrap: anywhere; }
+    details {
+      border-top: 1px solid #26313c;
+      padding-top: 10px;
+    }
+    summary { cursor: pointer; color: #d7e3ee; font-size: 13px; }
+    pre {
+      margin: 10px 0 0;
+      max-height: 250px;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 11px;
+      line-height: 1.35;
+      color: #d9e2ec;
+    }
+
+    @media (max-width: 920px) {
+      body { padding: 12px; }
+      header { align-items: start; flex-direction: column; }
+      .stamp { text-align: left; }
+      .status-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .layout { grid-template-columns: 1fr; }
+      .analytics { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px) {
+      .cards { grid-template-columns: 1fr; }
+      .status-strip { grid-template-columns: 1fr; }
+      .value { font-size: 20px; }
+      .item, .zone { font-size: 10px; }
+      .node::after { display: none; }
+      .history-row { grid-template-columns: 52px minmax(60px, 1fr) 38px 44px 46px; }
+      .history-row span:nth-child(6) { display: none; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>WiFi CSI TinyML IoT</h1>
+    <div id="stamp" class="stamp">loading...</div>
+  </header>
+  <div id="warnings" class="banner"></div>
+  <section class="status-strip">
+    <div id="chipHealth" class="chip"><span>System</span><strong>...</strong></div>
+    <div id="chipCSI" class="chip"><span>CSI Stream</span><strong>...</strong></div>
+    <div id="chipSignal" class="chip"><span>Room Link</span><strong>...</strong></div>
+    <div id="chipEdge" class="chip"><span>Edge TinyML</span><strong>...</strong></div>
+    <div id="chipSensors" class="chip"><span>Sensors</span><strong>...</strong></div>
+    <div id="chipStorage" class="chip"><span>IoT Storage</span><strong>...</strong></div>
+  </section>
+
+  <section class="cards">
+    <div class="card">
+      <div class="label">State</div>
+      <div id="state" class="value">...</div>
+      <div id="zone" class="sub"></div>
+    </div>
+    <div class="card">
+      <div class="label">Gateway ML</div>
+      <div id="confidence" class="value">...</div>
+      <div id="activity" class="sub"></div>
+      <div id="confidenceMeter" class="meter"><div></div></div>
+    </div>
+    <div class="card">
+      <div class="label">Temperature</div>
+      <div id="temp" class="value">...</div>
+      <div id="dht" class="sub"></div>
+    </div>
+    <div class="card">
+      <div class="label">Humidity</div>
+      <div id="humidity" class="value">...</div>
+      <div id="humiditySub" class="sub">DHT11 humidity</div>
+    </div>
+    <div class="card">
+      <div class="label">mmWave</div>
+      <div id="mmwave" class="value">...</div>
+      <div id="mmwaveSub" class="sub"></div>
+    </div>
+    <div class="card">
+      <div class="label">Room Link</div>
+      <div id="signal" class="value">...</div>
+      <div id="signalSub" class="sub"></div>
+      <div id="signalMeter" class="meter"><div></div></div>
+    </div>
+    <div class="card">
+      <div class="label">CSI</div>
+      <div id="amp" class="value">...</div>
+      <div id="frames" class="sub"></div>
+    </div>
+  </section>
+
+  <section class="layout">
+    <div class="room-card">
+      <div class="room-head">
+        <span>Room plan: 400 x 210 cm</span>
+        <span>coarse zone estimate</span>
+      </div>
+      <div class="room">
+        <div class="item heater">pec</div>
+        <div class="item desk">sto<br>laptop</div>
+        <div class="item bed">krevet</div>
+        <div class="item wardrobe">ormar</div>
+        <div class="door" title="vrata"></div>
+        <div id="roomLink" class="link"></div>
+        <div id="z1" class="zone z1">Z1 vrata</div>
+        <div id="z2" class="zone z2">Z2 sredina</div>
+        <div id="z3" class="zone z3">Z3 krevet</div>
+        <div class="node rx" data-label="ESP32-S3 RX"></div>
+        <div class="node tx" data-label="ESP32 TX sender"></div>
+      </div>
+      <div class="analytics">
+        <div class="plot">
+          <div class="plot-head"><span>CSI preview</span><span id="csiPlotMeta">...</span></div>
+          <canvas id="csiCanvas" width="520" height="120"></canvas>
+        </div>
+        <div class="plot">
+          <div class="plot-head"><span>Room-link activity</span><span id="confidencePlotMeta">...</span></div>
+          <canvas id="confidenceCanvas" width="520" height="120"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <aside class="side">
+      <div class="status-list">
+        <div class="row"><span>ESP32-S3</span><span id="s3">...</span></div>
+        <div class="row"><span>Sender</span><span id="sender">...</span></div>
+        <div class="row"><span>CSI</span><span id="csiStatus">...</span></div>
+        <div class="row"><span>Signal Filter</span><span id="signalStatus">...</span></div>
+        <div class="row"><span>Decision</span><span id="decisionStatus">...</span></div>
+        <div class="row"><span>Zone Filter</span><span id="zoneFilterStatus">...</span></div>
+        <div class="row"><span>Model</span><span id="modelStatus">...</span></div>
+        <div class="row"><span>Edge TinyML</span><span id="edgeStatus">...</span></div>
+        <div class="row"><span>DHT11</span><span id="dhtStatus">...</span></div>
+        <div class="row"><span>mmWave</span><span id="mmStatus">...</span></div>
+        <div class="row"><span>MQTT</span><span id="mqttStatus">...</span></div>
+        <div class="row"><span>SQLite DB</span><span id="dbStatus">...</span></div>
+        <div class="row"><span>Updated</span><span id="updated">...</span></div>
+      </div>
+      <section class="history-panel">
+        <div class="history-head"><span>SQLite history</span><span id="historyMeta">...</span></div>
+        <div id="historyRows" class="history-rows">
+          <div class="history-empty">loading...</div>
+        </div>
+      </section>
+      <details>
+        <summary>Live JSON</summary>
+        <pre id="json">loading...</pre>
+      </details>
+    </aside>
+  </section>
+</main>
+
+<script>
+const zoneMap = { zone_door_left: "z1", zone_middle: "z2", zone_bed_right: "z3" };
+const confidenceHistory = [];
+const signalHistory = [];
+let lastHistoryFetch = 0;
+const labelMap = {
+  empty_room: "empty room",
+  person_present: "osoba prisutna",
+  uncertain: "nesigurno",
+  no_csi: "CSI offline",
+  zone_uncertain: "zona nesigurna",
+  stale_csi: "stale CSI",
+  zone_door_left: "Z1 vrata",
+  zone_middle: "Z2 sredina",
+  zone_bed_right: "Z3 krevet",
+  accepted: "prihvacena",
+  disabled: "raw only",
+  holding: "provjera",
+  warming: "stabilizacija",
+  low_confidence: "nizak confidence",
+  weak_margin: "slaba razlika",
+  presence_not_confirmed: "presence nije stabilan",
+  not_a_zone: "nije zona",
+  calibrating: "kalibracija",
+  quiet: "mirno",
+  motion: "kretanje",
+  strong_motion: "jako kretanje"
+};
+
+function pct(v) {
+  const n = Number(v);
+  return Number.isFinite(n) ? `${Math.round(n * 100)}%` : "...";
+}
+
+function val(v, suffix = "") {
+  return v === undefined || v === null ? "..." : `${v}${suffix}`;
+}
+
+function shortTime(iso) {
+  if (!iso) return "...";
+  const d = new Date(iso);
+  return Number.isNaN(d.valueOf()) ? iso : d.toLocaleTimeString();
+}
+
+function ageSeconds(iso) {
+  if (!iso) return null;
+  const d = new Date(iso);
+  if (Number.isNaN(d.valueOf())) return null;
+  return Math.max(0, Math.round((Date.now() - d.valueOf()) / 1000));
+}
+
+function setValue(id, text, status) {
+  const el = document.getElementById(id);
+  el.textContent = text;
+  el.classList.remove("ok", "warn", "bad");
+  if (status) el.classList.add(status);
+}
+
+function statusClass(ok, warn = false) {
+  if (ok) return "ok";
+  if (warn) return "warn";
+  return "bad";
+}
+
+function setChip(id, label, status) {
+  const el = document.getElementById(id);
+  const strong = el.querySelector("strong");
+  strong.textContent = label;
+  el.classList.remove("ok", "warn", "bad");
+  el.classList.add(status);
+}
+
+function setMeter(id, value, status) {
+  const el = document.getElementById(id);
+  const bar = el.querySelector("div");
+  const pctValue = Math.max(0, Math.min(100, Math.round(Number(value) * 100)));
+  bar.style.width = `${Number.isFinite(pctValue) ? pctValue : 0}%`;
+  el.classList.remove("ok", "warn", "bad");
+  el.classList.add(status || "ok");
+}
+
+function drawLine(canvasId, values, color, fillColor) {
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext("2d");
+  const w = canvas.width;
+  const h = canvas.height;
+  ctx.clearRect(0, 0, w, h);
+  ctx.fillStyle = "#0d141c";
+  ctx.fillRect(0, 0, w, h);
+  ctx.strokeStyle = "#26313c";
+  ctx.lineWidth = 1;
+  for (let i = 1; i < 4; i++) {
+    const y = (h / 4) * i;
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(w, y);
+    ctx.stroke();
+  }
+  if (!Array.isArray(values) || values.length < 2) return;
+  const nums = values.map(Number).filter(Number.isFinite);
+  if (nums.length < 2) return;
+  const min = Math.min(...nums);
+  const max = Math.max(...nums);
+  const span = Math.max(max - min, 1e-6);
+  ctx.beginPath();
+  nums.forEach((v, i) => {
+    const x = (w * i) / Math.max(nums.length - 1, 1);
+    const y = h - ((v - min) / span) * (h - 14) - 7;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.lineTo(w, h);
+  ctx.lineTo(0, h);
+  ctx.closePath();
+  ctx.fillStyle = fillColor;
+  ctx.fill();
+}
+
+function renderHistory(history) {
+  const rowsEl = document.getElementById("historyRows");
+  const metaEl = document.getElementById("historyMeta");
+  const rows = Array.isArray(history?.rows) ? history.rows : [];
+  metaEl.textContent = rows.length
+    ? `${rows.length} rows / ${history.minutes || 10} min`
+    : "no recent rows";
+  rowsEl.replaceChildren();
+  if (!rows.length) {
+    const empty = document.createElement("div");
+    empty.className = "history-empty";
+    empty.textContent = "no SQLite rows in the last 10 minutes";
+    rowsEl.appendChild(empty);
+    return;
+  }
+  rows.slice(0, 6).forEach((row) => {
+    const item = document.createElement("div");
+    item.className = "history-row";
+    const confidence = Number(row.confidence);
+    const fps = Number(row.csi_fps);
+    const mmwave = row.mmwave_present === true ? "present" : row.mmwave_present === false ? "clear" : "...";
+    const cells = [
+      shortTime(row.ts_utc),
+      labelMap[row.state] || row.state || "...",
+      Number.isFinite(confidence) ? `${Math.round(confidence * 100)}%` : "...",
+      Number.isFinite(fps) ? `${fps.toFixed(1)}fps` : "...",
+      mmwave,
+      row.dht11_status || "..."
+    ];
+    cells.forEach((text, index) => {
+      const span = document.createElement("span");
+      span.textContent = text;
+      if (index === 2 && Number.isFinite(confidence)) span.className = confidence >= .75 ? "ok" : "warn";
+      if (index === 4 && mmwave === "present") span.className = "warn";
+      item.appendChild(span);
+    });
+    rowsEl.appendChild(item);
+  });
+}
+
+async function refreshHistory() {
+  try {
+    const res = await fetch("/api/room-history", { cache: "no-store" });
+    const history = await res.json();
+    renderHistory(history);
+  } catch (err) {
+    document.getElementById("historyMeta").textContent = "offline";
+    const rowsEl = document.getElementById("historyRows");
+    rowsEl.replaceChildren();
+    const empty = document.createElement("div");
+    empty.className = "history-empty";
+    empty.textContent = "history API unavailable";
+    rowsEl.appendChild(empty);
+  }
+}
+
+async function refresh() {
+  try {
+    const res = await fetch("/api/room-state", { cache: "no-store" });
+    const data = await res.json();
+    const zone = data.zone || data.source_label || "unknown";
+    const active = zoneMap[zone];
+    const zoneDecision = data.zone_decision || {};
+    const warnings = Array.isArray(data.warnings) ? [...data.warnings] : [];
+    const stateAge = ageSeconds(data.ts_utc);
+    if (stateAge !== null && stateAge > 10) warnings.push(`Dashboard state is stale: ${stateAge}s old.`);
+
+    const csiStatus = data.csi?.status || "unknown";
+    const csiOnline = csiStatus === "online";
+    const signal = data.signal_filter || {};
+    const signalState = signal.state || (csiOnline ? "waiting" : "offline");
+    const signalScore = Number(signal.activity_score);
+    const signalThreshold = Number(signal.threshold);
+    const signalReady = Boolean(signal.baseline_ready);
+    const signalLevel = Number.isFinite(signalScore) && Number.isFinite(signalThreshold) && signalThreshold > 0
+      ? Math.min(1, signalScore / (signalThreshold * 2))
+      : 0;
+    const dhtStatus = (data.dht11 && data.dht11.status) || "unknown";
+    const mmStatus = data.mmwave?.status || "unknown";
+    const mmOnline = mmStatus === "online";
+    const dbOnline = data.database?.status === "online";
+    const mqttOnline = data.mqtt?.status === "online";
+    const edgeOnline = Boolean(data.edge_tinyml?.state);
+    const sensorsOk = (dhtStatus === "online" || dhtStatus === "last_valid") && mmOnline;
+    const healthScore = [csiOnline, sensorsOk, dbOnline, edgeOnline].filter(Boolean).length / 4;
+    setChip("chipHealth", `${Math.round(healthScore * 100)}%`, statusClass(healthScore >= .75, healthScore >= .5));
+    setChip("chipCSI", csiOnline ? "online" : "offline", statusClass(csiOnline));
+    setChip(
+      "chipSignal",
+      csiOnline ? (labelMap[signalState] || signalState) : "offline",
+      statusClass(csiOnline && signalReady, csiOnline)
+    );
+    setChip("chipEdge", edgeOnline ? "running" : "waiting", statusClass(edgeOnline, true));
+    setChip("chipSensors", sensorsOk ? "online" : "check", statusClass(sensorsOk, dhtStatus === "last_valid"));
+    setChip("chipStorage", dbOnline ? (mqttOnline ? "db+mq" : "db only") : "offline", statusClass(dbOnline, mqttOnline));
+
+    document.getElementById("state").textContent = csiOnline
+      ? (labelMap[data.state] || data.state || labelMap[zone] || zone)
+      : "CSI offline";
+    const zoneConfidence = data.zone_confidence !== undefined ? ` ${pct(data.zone_confidence)}` : "";
+    const zoneFilterStatusValue = zoneDecision.status || data.zone_status;
+    const zoneFilterLabel = zoneFilterStatusValue ? (labelMap[zoneFilterStatusValue] || zoneFilterStatusValue) : "bez filtera";
+    document.getElementById("zone").textContent = csiOnline
+      ? `zone: ${labelMap[zone] || zone}${zoneConfidence}; ${zoneFilterLabel}; raw ${labelMap[data.raw_prediction] || data.raw_prediction || "..."}`
+      : `last known: ${labelMap[data.last_known_csi?.zone] || data.last_known_csi?.zone || "..."}; waiting for sender`;
+    document.getElementById("confidence").textContent = pct(data.confidence);
+    document.getElementById("activity").textContent = `person: ${pct(data.presence?.person_probability ?? data.activity_level)}`;
+    setMeter("confidenceMeter", data.confidence, data.confidence >= .75 ? "ok" : data.confidence >= .5 ? "warn" : "bad");
+    document.getElementById("temp").textContent = val(data.temperature_c, " C");
+    document.getElementById("humidity").textContent = val(data.humidity_pct, "%");
+    const dhtError = data.dht11?.error !== undefined && data.dht11?.error !== null ? ` err ${data.dht11.error}` : "";
+    document.getElementById("dht").textContent = `DHT11: ${dhtStatus}${dhtError}`;
+    const dhtLast = data.dht11?.last_reading_utc ? `last valid ${shortTime(data.dht11.last_reading_utc)}` : "no valid reading";
+    document.getElementById("humiditySub").textContent = dhtLast;
+    setValue("mmwave", mmOnline ? (data.mmwave_present ? "present" : "clear") : mmStatus, mmOnline ? (data.mmwave_present ? "warn" : "ok") : "bad");
+    document.getElementById("mmwaveSub").textContent = mmOnline ? `OT2 GPIO${data.mmwave?.gpio || ""}` : "no live sensor reading";
+    const signalStatus = !csiOnline ? "bad" : !signalReady ? "warn" : signalState === "quiet" ? "ok" : "warn";
+    setValue("signal", csiOnline ? (labelMap[signalState] || signalState) : "offline", signalStatus);
+    document.getElementById("signalSub").textContent = Number.isFinite(signalScore)
+      ? `activity ${Math.round(signalScore * 100)}%; baseline ${signal.baseline_frames ?? 0} frames`
+      : "waiting for CSI baseline";
+    setMeter("signalMeter", signalLevel, signalStatus);
+    const csiFps = data.csi?.fps === undefined || data.csi?.fps === null ? NaN : Number(data.csi.fps);
+    const fpsText = Number.isFinite(csiFps) ? `${csiFps.toFixed(2)} fps` : "fps ...";
+    const csiAge = data.csi?.age_sec !== undefined && data.csi?.age_sec !== null ? `age ${data.csi.age_sec}s` : "age ...";
+    const windowFill = data.csi?.window_fill_sec !== undefined && data.csi?.window_fill_sec !== null ? `window ${data.csi.window_fill_sec}s` : "window ...";
+    setValue("amp", val(data.mean_amplitude), csiStatus === "online" ? "ok" : "bad");
+    document.getElementById("frames").textContent = `${val(data.frame_count)} frames | ${fpsText}`;
+    document.getElementById("s3").textContent = `${data.esp32_s3?.status || "unknown"} ${data.esp32_s3?.port || ""}`;
+    document.getElementById("sender").textContent = `${data.esp32_devkit_v1?.status || "unknown"} ${data.esp32_devkit_v1?.port || ""}`;
+    document.getElementById("csiStatus").textContent = `${csiStatus} ${fpsText}; ${csiAge}; ${windowFill}`;
+    document.getElementById("signalStatus").textContent = csiOnline
+      ? `${labelMap[signalState] || signalState}; score ${Number.isFinite(signalScore) ? signalScore.toFixed(3) : "..."}; threshold ${Number.isFinite(signalThreshold) ? signalThreshold.toFixed(3) : "..."}`
+      : "waiting for CSI stream";
+    const decision = data.decision || {};
+    document.getElementById("decisionStatus").textContent = decision.state
+      ? `${labelMap[decision.state] || decision.state}; stable ${labelMap[decision.stable_state] || decision.stable_state || "..."}; conflict ${decision.conflict ? "yes" : "no"}`
+      : "waiting for decision";
+    document.getElementById("zoneFilterStatus").textContent = zoneFilterStatusValue
+      ? `${labelMap[zoneFilterStatusValue] || zoneFilterStatusValue}; raw ${labelMap[zoneDecision.raw_zone] || zoneDecision.raw_zone || labelMap[data.raw_prediction] || data.raw_prediction || "..."}; margin ${val(zoneDecision.margin)}; ${labelMap[zoneDecision.reason] || zoneDecision.reason || "..."}`
+      : "waiting for zone filter";
+    document.getElementById("modelStatus").textContent = `${data.model?.type || "unknown"} zone win ${data.model?.window_size || "?"}; presence win ${data.model?.presence_window_size || "?"}`;
+    const edge = data.edge_tinyml || {};
+    const edgeProb = edge.person_probability ?? (edge.person_probability_milli !== undefined ? edge.person_probability_milli / 1000 : null);
+    const edgeAge = edge.last_reading_utc ? ageSeconds(edge.last_reading_utc) : null;
+    document.getElementById("edgeStatus").textContent = edge.state
+      ? `${labelMap[edge.state] || edge.state} ${pct(edgeProb)}; ${val(edge.latency_us, " us")}; age ${edgeAge ?? "..."}s`
+      : "waiting for firmware";
+    document.getElementById("dhtStatus").textContent = `${data.dht11?.status || "unknown"} GPIO${data.dht11?.gpio || ""}`;
+    document.getElementById("mmStatus").textContent = mmOnline ? (data.mmwave_present ? "present" : "clear") : mmStatus;
+    document.getElementById("mqttStatus").textContent = `${data.mqtt?.status || "unknown"} ${data.mqtt?.topic || ""}`;
+    document.getElementById("dbStatus").textContent = `${data.database?.status || "unknown"} ${data.database?.path || ""}`;
+    document.getElementById("updated").textContent = shortTime(data.ts_utc);
+    document.getElementById("stamp").textContent = `last update ${shortTime(data.ts_utc)}`;
+    document.getElementById("json").textContent = JSON.stringify(data, null, 2);
+    const warningsEl = document.getElementById("warnings");
+    warningsEl.textContent = warnings.join(" ");
+    warningsEl.classList.toggle("visible", warnings.length > 0);
+    const confidenceValue = Number(data.presence?.person_probability ?? data.activity_level ?? data.confidence);
+    if (Number.isFinite(confidenceValue)) {
+      confidenceHistory.push(confidenceValue);
+      while (confidenceHistory.length > 90) confidenceHistory.shift();
+    }
+    if (Number.isFinite(signalScore)) {
+      signalHistory.push(signalScore);
+      while (signalHistory.length > 90) signalHistory.shift();
+    }
+    drawLine("csiCanvas", data.csi_preview || [], "#22d3ee", "rgba(34, 211, 238, .14)");
+    drawLine("confidenceCanvas", signalHistory, "#eab308", "rgba(234, 179, 8, .14)");
+    document.getElementById("csiPlotMeta").textContent = `${val(data.csi_preview?.length)} bins`;
+    document.getElementById("confidencePlotMeta").textContent = `${signalHistory.length} samples`;
+
+    const roomLink = document.getElementById("roomLink");
+    roomLink.classList.toggle("motion", csiOnline && signalState === "motion");
+    roomLink.classList.toggle("strong", csiOnline && signalState === "strong_motion");
+
+    for (const id of ["z1", "z2", "z3"]) document.getElementById(id).classList.remove("active");
+    if (active && csiOnline && data.zone_status === "accepted") document.getElementById(active).classList.add("active");
+    if (Date.now() - lastHistoryFetch > 5000) {
+      lastHistoryFetch = Date.now();
+      refreshHistory();
+    }
+  } catch (err) {
+    document.getElementById("json").textContent = String(err);
+    document.getElementById("stamp").textContent = "dashboard error";
+  }
+}
+
+refresh();
+refreshHistory();
+setInterval(refresh, 300);
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "empty_source": "data\\raw\\empty_room\\empty_room_20260518_215156\\records.jsonl",
+  "person_source": "data\\raw\\person_present_or_moving\\person_present_or_moving_20260518_224146\\records.jsonl",
+  "empty_frames_plotted": 1200,
+  "person_frames_plotted": 1200,
+  "outputs": [
+    "outputs\\visuals\\csi_activity_difference.png",
+    "outputs\\visuals\\csi_activity_timeline.png",
+    "outputs\\visuals\\csi_heatmap_empty_room.png",
+    "outputs\\visuals\\csi_heatmap_person_present.png",
+    "outputs\\visuals\\room_experiment_schema.png"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "state": "PERSON_PRESENT",
+  "confidence": 0.91,
+  "temperature_c": 23.7,
+  "humidity_pct": 44.2,
+  "mmwave_present": true,
+  "latency_ms": 18,
+  "esp32_s3": {
+    "role": "receiver_tinyml",
+    "status": "online",
+    "port": "COM3"
+  },
+  "esp32_devkit_v1": {
+    "role": "sender",
+    "status": "pending_usb",
+    "port": null
+  },
+  "csi_preview": [2, 6, 11, 18, 23, 19, 13, 7, 4, 9, 15, 22, 30, 26, 17, 10]
+}

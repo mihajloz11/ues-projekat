@@ -1,0 +1,11 @@
+{
+  "started_utc": "2026-05-18T20:41:46+00:00",
+  "port": "COM3",
+  "baud": 921600,
+  "label": "person_present_or_moving",
+  "raw_log": "data\\raw\\person_present_or_moving\\person_present_or_moving_20260518_224146\\raw_serial.log",
+  "jsonl": "data\\raw\\person_present_or_moving\\person_present_or_moving_20260518_224146\\records.jsonl",
+  "notes": "CSI receiver session. Keep hardware layout and room state stable during capture.",
+  "ended_utc": "2026-05-18T20:44:46+00:00",
+  "lines": 7495
+}

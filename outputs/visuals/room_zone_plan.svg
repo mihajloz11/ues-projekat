@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <style>
+      .bg { fill: #eef2f4; }
+      .room { fill: #fffdf8; stroke: #141414; stroke-width: 10; }
+      .wall-label { font: 600 18px Arial, sans-serif; fill: #45515b; }
+      .title { font: 800 38px Arial, sans-serif; fill: #17212b; }
+      .subtitle { font: 400 20px Arial, sans-serif; fill: #52616d; }
+      .furn { fill: #fff2e6; stroke: #ff7a1a; stroke-width: 6; }
+      .stove { fill: #ffecec; stroke: #e32828; stroke-width: 6; }
+      .door { stroke: #8d0018; stroke-width: 9; stroke-linecap: round; }
+      .label { font: 700 20px Arial, sans-serif; fill: #1f2b34; }
+      .small { font: 500 16px Arial, sans-serif; fill: #40505c; }
+      .tiny { font: 400 14px Arial, sans-serif; fill: #596875; }
+      .zone { stroke-width: 5; stroke-dasharray: 12 9; rx: 22; }
+      .zone1 { fill: rgba(66, 153, 225, 0.18); stroke: #2f80c9; }
+      .zone2 { fill: rgba(50, 180, 100, 0.18); stroke: #2d9b56; }
+      .zone3 { fill: rgba(238, 174, 55, 0.22); stroke: #d79218; }
+      .zone4 { fill: rgba(142, 95, 210, 0.17); stroke: #8055bf; }
+      .zone-title { font: 800 22px Arial, sans-serif; fill: #13242e; }
+      .person { fill: #c83322; stroke: #7e1b10; stroke-width: 4; }
+      .person-line { stroke: #7e1b10; stroke-width: 5; stroke-linecap: round; }
+      .esp-card { fill: #ffffff; stroke: #101820; stroke-width: 4; }
+      .esp-dot { fill: #101820; stroke: #ffffff; stroke-width: 4; }
+      .esp-title { font: 800 21px Arial, sans-serif; fill: #101820; }
+      .esp-sub { font: 600 15px Arial, sans-serif; fill: #3c4a53; }
+      .wifi { stroke: #1d75d1; stroke-width: 6; stroke-dasharray: 18 13; fill: none; }
+      .wifi-soft { stroke: #67aaf0; stroke-width: 54; opacity: 0.14; fill: none; }
+      .callout { fill: #ffffff; stroke: #d3d9df; stroke-width: 2; }
+      .callout-title { font: 800 22px Arial, sans-serif; fill: #17212b; }
+      .callout-line { font: 500 16px Arial, sans-serif; fill: #354550; }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,8 L11,4 z" fill="#1d75d1" />
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1600" height="1000"/>
+
+  <text class="title" x="80" y="70">WiFi CSI plan snimanja po zonama</text>
+  <text class="subtitle" x="80" y="105">Soba oko 400 x 210 cm. Cilj: ESP32-S3 receiver na stolu, ESP32 sender na krevetu, osoba stoji po oznacenim zonama.</text>
+
+  <!-- Room -->
+  <rect class="room" x="110" y="165" width="1040" height="546"/>
+  <text class="wall-label" x="575" y="148">400 cm</text>
+  <text class="wall-label" x="1175" y="450">210 cm</text>
+
+  <!-- Furniture -->
+  <rect class="stove" x="145" y="205" width="260" height="190" rx="10"/>
+  <text class="label" x="252" y="290">PEC</text>
+  <text class="tiny" x="200" y="318">crvena zona</text>
+
+  <rect class="furn" x="430" y="200" width="360" height="175" rx="10"/>
+  <text class="label" x="545" y="275">STO</text>
+  <text class="small" x="485" y="305">laptop + ESP32-S3</text>
+
+  <rect class="furn" x="895" y="200" width="215" height="470" rx="10"/>
+  <text class="label" x="965" y="405">KREVET</text>
+  <text class="small" x="928" y="435">ESP32 sender</text>
+  <text class="small" x="930" y="460">mozes sjesti</text>
+
+  <rect class="furn" x="410" y="520" width="455" height="150" rx="10"/>
+  <text class="label" x="594" y="595">ORMAR</text>
+  <text class="small" x="550" y="623">tu ne stajati</text>
+  <line x1="450" y1="638" x2="810" y2="545" stroke="#ff7a1a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="475" y1="545" x2="840" y2="640" stroke="#8d0018" stroke-width="6" stroke-linecap="round"/>
+
+  <line class="door" x1="110" y1="430" x2="110" y2="590"/>
+  <text class="label" x="45" y="520">VRATA</text>
+
+  <!-- Zones -->
+  <rect class="zone zone1" x="155" y="430" width="210" height="230"/>
+  <text class="zone-title" x="190" y="475">Z1</text>
+  <text class="small" x="190" y="502">vrata / lijevo</text>
+  <circle class="person" cx="260" cy="575" r="23"/>
+  <line class="person-line" x1="260" y1="598" x2="260" y2="640"/>
+  <line class="person-line" x1="238" y1="620" x2="282" y2="620"/>
+
+  <rect class="zone zone2" x="520" y="390" width="250" height="120"/>
+  <text class="zone-title" x="565" y="435">Z2</text>
+  <text class="small" x="565" y="462">sredina prolaza</text>
+  <circle class="person" cx="690" cy="475" r="23"/>
+  <line class="person-line" x1="690" y1="498" x2="690" y2="535"/>
+  <line class="person-line" x1="668" y1="517" x2="712" y2="517"/>
+
+  <rect class="zone zone3" x="890" y="455" width="215" height="205"/>
+  <text class="zone-title" x="930" y="520">Z3</text>
+  <text class="small" x="930" y="548">krevet / desno</text>
+  <circle class="person" cx="1010" cy="610" r="23"/>
+  <line class="person-line" x1="1010" y1="633" x2="1010" y2="668"/>
+  <line class="person-line" x1="988" y1="650" x2="1032" y2="650"/>
+
+  <rect class="zone zone4" x="505" y="210" width="220" height="150"/>
+  <text class="zone-title" x="545" y="252">Z4</text>
+  <text class="small" x="545" y="279">kod stola</text>
+  <text class="tiny" x="545" y="303">opciono kasnije</text>
+
+  <!-- ESP placement cards and dots -->
+  <circle class="esp-dot" cx="780" cy="355" r="25"/>
+  <rect class="esp-card" x="655" y="245" width="270" height="88" rx="14"/>
+  <text class="esp-title" x="680" y="282">ESP32-S3 receiver</text>
+  <text class="esp-sub" x="680" y="307">na rub stola, uz laptop</text>
+  <path d="M785 333 L780 355" stroke="#101820" stroke-width="4"/>
+
+  <circle class="esp-dot" cx="930" cy="490" r="25"/>
+  <rect class="esp-card" x="1010" y="300" width="290" height="96" rx="14"/>
+  <text class="esp-title" x="1035" y="338">ESP32 sender</text>
+  <text class="esp-sub" x="1035" y="363">na krevet / power bank</text>
+  <text class="esp-sub" x="1035" y="383">ne mora u laptop</text>
+  <path d="M1010 385 L948 475" stroke="#101820" stroke-width="4"/>
+
+  <!-- WiFi link -->
+  <path class="wifi-soft" d="M780 355 C820 400 880 455 930 490"/>
+  <path class="wifi" marker-end="url(#arrow)" d="M780 355 C820 400 880 455 930 490"/>
+  <text class="small" x="725" y="445" fill="#1d75d1">glavni CSI link</text>
+
+  <!-- Capture order -->
+  <rect class="callout" x="1185" y="430" width="330" height="280" rx="18"/>
+  <text class="callout-title" x="1215" y="475">Redoslijed snimanja</text>
+  <text class="callout-line" x="1215" y="515">1. empty_room: niko u sobi</text>
+  <text class="callout-line" x="1215" y="550">2. Z1: vrata / lijevo</text>
+  <text class="callout-line" x="1215" y="585">3. Z2: sredina prolaza</text>
+  <text class="callout-line" x="1215" y="620">4. Z3: krevet / desno</text>
+  <text class="callout-line" x="1215" y="655">5. Z4: kod stola, opciono</text>
+  <text class="tiny" x="1215" y="690">U svakoj zoni stoj/sjedi 2-3 min.</text>
+
+  <!-- Bottom instruction -->
+  <rect class="callout" x="110" y="765" width="1040" height="130" rx="18"/>
+  <text class="callout-title" x="145" y="810">Najbitnije za dobar dataset</text>
+  <text class="callout-line" x="145" y="846">ESP32-S3 neka bude na stolu, ali izvucen prema sobi. ESP32 sender neka bude na krevetu.</text>
+  <text class="callout-line" x="145" y="878">Ne pomjeraj module tokom snimanja. U jednoj sesiji ostani samo u jednoj zoni.</text>
+</svg>

@@ -1,0 +1,93 @@
+{
+  "person_still": [
+    {
+      "session": "20260618_214534",
+      "fps": 38.3,
+      "frames": 11477,
+      "ref_subc": 110,
+      "raw_amp": {
+        "acf": 0.279,
+        "bpm": 13.3,
+        "subc": 14
+      },
+      "cscr": {
+        "acf": 0.247,
+        "bpm": 9.5,
+        "subc": 118
+      },
+      "timing": "local_ts"
+    }
+  ],
+  "empty_room": [
+    {
+      "session": "20260618_212756",
+      "fps": 37.5,
+      "frames": 11251,
+      "ref_subc": 114,
+      "raw_amp": {
+        "acf": 0.242,
+        "bpm": 7.4,
+        "subc": 66
+      },
+      "cscr": {
+        "acf": 0.245,
+        "bpm": 8.6,
+        "subc": 117
+      },
+      "timing": "local_ts"
+    },
+    {
+      "session": "empty_room_20260518_215156",
+      "fps": 16.2,
+      "frames": 2905,
+      "ref_subc": 106,
+      "raw_amp": {
+        "acf": 0.345,
+        "bpm": 7.1,
+        "subc": 121
+      },
+      "cscr": {
+        "acf": 0.329,
+        "bpm": 7.2,
+        "subc": 181
+      },
+      "timing": "local_ts"
+    },
+    {
+      "session": "empty_room_5min_20260520_131234",
+      "fps": 37.3,
+      "frames": 11183,
+      "ref_subc": 83,
+      "raw_amp": {
+        "acf": 0.29,
+        "bpm": 9.3,
+        "subc": 37
+      },
+      "cscr": {
+        "acf": 0.26,
+        "bpm": 7.1,
+        "subc": 113
+      },
+      "timing": "local_ts"
+    }
+  ],
+  "person_present_or_moving": [
+    {
+      "session": "person_present_or_moving_20260518_224146",
+      "fps": 19.2,
+      "frames": 3463,
+      "ref_subc": 110,
+      "raw_amp": {
+        "acf": 0.233,
+        "bpm": 6.8,
+        "subc": 47
+      },
+      "cscr": {
+        "acf": 0.275,
+        "bpm": 7.5,
+        "subc": 114
+      },
+      "timing": "duration_est"
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "created_utc": "2026-06-03T16:05:34+00:00",
+  "mode": "session_level_holdout",
+  "binary_presence": true,
+  "window_size": 8,
+  "hop": 2,
+  "hidden_size": 32,
+  "epochs": 2,
+  "labels": [
+    "empty_room",
+    "person_present"
+  ],
+  "sessions": [
+    {
+      "source_label": "empty_room",
+      "target_label": "empty_room",
+      "path": "data\\raw\\empty_room\\empty_room_20260518_215156\\records.jsonl",
+      "frames": 2905,
+      "windows": 1449
+    },
+    {
+      "source_label": "empty_room",
+      "target_label": "empty_room",
+      "path": "data\\raw\\empty_room\\empty_room_5min_20260520_131234\\records.jsonl",
+      "frames": 11183,
+      "windows": 5588
+    },
+    {
+      "source_label": "empty_room",
+      "target_label": "empty_room",
+      "path": "data\\raw\\empty_room\\empty_room_run1_20260518_225758\\records.jsonl",
+      "frames": 4234,
+      "windows": 2114
+    },
+    {
+      "source_label": "empty_room",
+      "target_label": "empty_room",
+      "path": "data\\raw\\empty_room\\empty_room_run2_20260518_230339\\records.jsonl",
+      "frames": 3917,
+      "windows": 1955
+    },
+    {
+      "source_label": "empty_room",
+      "target_label": "empty_room",
+      "path": "data\\raw\\empty_room\\empty_room_run3_20260518_230858\\records.jsonl",
+      "frames": 3899,
+      "windows": 1946
+    },
+    {
+      "source_label": "person_present_or_moving",
+      "target_label": "person_present",
+      "path": "data\\raw\\person_present_or_moving\\person_present_or_moving_20260518_224146\\records.jsonl",
+      "frames": 3463,
+      "windows": 1728
+    },
+    {
+      "source_label": "person_present_or_moving",
+      "target_label": "person_present",
+      "path": "data\\raw\\person_present_or_moving\\person_present_or_moving_5min_20260519_212030\\records.jsonl",
+      "frames": 4565,
+      "windows": 2279
+    },
+    {
+      "source_label": "zone_door_left",
+      "target_label": "person_present",
+      "path": "data\\raw\\zone_door_left\\zone_door_left_3min_20260528_214838\\records.jsonl",
+      "frames": 2433,
+      "windows": 1213
+    },
+    {
+      "source_label": "zone_door_left",
+      "target_label": "person_present",
+      "path": "data\\raw\\zone_door_left\\zone_door_left_extra_5min_20260603_125522\\records.jsonl",
+      "frames": 2514,
+      "windows": 1254
+    },
+    {
+      "source_label": "zone_middle",
+      "target_label": "person_present",
+      "path": "data\\raw\\zone_middle\\zone_middle_3min_20260528_213748\\records.jsonl",
+      "frames": 2974,
+      "windows": 1484
+    },
+    {
+      "source_label": "zone_middle",
+      "target_label": "person_present",
+      "path": "data\\raw\\zone_middle\\zone_middle_extra_5min_20260603_122242\\records.jsonl",
+      "frames": 2401,
+      "windows": 1197
+    },
+    {
+      "source_label": "zone_bed_right",
+      "target_label": "person_present",
+      "path": "data\\raw\\zone_bed_right\\bed_lying_5min_20260531_121946\\records.jsonl",
+      "frames": 2571,
+      "windows": 1282
+    },
+    {
+      "source_label": "zone_bed_right",
+      "target_label": "person_present",
+      "path": "data\\raw\\zone_bed_right\\bed_lying_extra_5min_20260531_124207\\records.jsonl",
+      "frames": 2175,
+      "windows": 1084
+    },
+    {
+      "source_label": "zone_bed_right",
+      "target_label": "person_present",
+      "path": "data\\raw\\zone_bed_right\\bed_lying_extra_5min_20260603_121107\\records.jsonl",
+      "frames": 2252,
+      "windows": 1123
+    },
+    {
+      "source_label": "zone_bed_right",
+      "target_label": "person_present",
+      "path": "data\\raw\\zone_bed_right\\zone_bed_right_3min_20260528_214302\\records.jsonl",
+      "frames": 2298,
+      "windows": 1146
+    }
+  ],
+  "holdout_count": 1,
+  "aggregate": {
+    "accuracy": 0.9896,
+    "test_windows": 1449,
+    "per_class": {
+      "empty_room": {
+        "precision": 1.0,
+        "recall": 0.9896,
+        "f1": 0.9948
+      },
+      "person_present": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    },
+    "confusion": {
+      "empty_room": {
+        "empty_room": 1434,
+        "person_present": 15
+      },
+      "person_present": {}
+    }
+  },
+  "results": [
+    {
+      "holdout_path": "data\\raw\\empty_room\\empty_room_20260518_215156\\records.jsonl",
+      "source_label": "empty_room",
+      "target_label": "empty_room",
+      "test_windows": 1449,
+      "accuracy": 0.9896,
+      "per_class": {
+        "empty_room": {
+          "precision": 1.0,
+          "recall": 0.9896,
+          "f1": 0.9948
+        },
+        "person_present": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": {
+        "empty_room": {
+          "empty_room": 1434,
+          "person_present": 15
+        }
+      },
+      "training_tail": [
+        {
+          "epoch": 1,
+          "loss": 0.412458,
+          "accuracy": 0.9218
+        },
+        {
+          "epoch": 2,
+          "loss": 0.279645,
+          "accuracy": 0.9299
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Each result trains without the listed holdout session and tests on that whole session.",
+    "This is slower but more defensible than a random window-level split."
+  ]
+}

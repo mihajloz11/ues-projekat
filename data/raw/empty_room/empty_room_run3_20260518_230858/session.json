@@ -1,0 +1,11 @@
+{
+  "started_utc": "2026-05-18T21:08:59+00:00",
+  "port": "COM3",
+  "baud": 921600,
+  "label": "empty_room",
+  "raw_log": "data\\raw\\empty_room\\empty_room_run3_20260518_230858\\raw_serial.log",
+  "jsonl": "data\\raw\\empty_room\\empty_room_run3_20260518_230858\\records.jsonl",
+  "notes": "CSI receiver session. Keep hardware layout and room state stable during capture.",
+  "ended_utc": "2026-05-18T21:13:59+00:00",
+  "lines": 8391
+}

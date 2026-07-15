@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="sr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="data:," />
+  <title>ESP32-S3 IoT — Room Monitor</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1020;
+      --panel: #151b30;
+      --panel2: #1b2338;
+      --line: #2a3450;
+      --txt: #e7ecf6;
+      --muted: #93a0bd;
+      --green: #3ad29f;
+      --red: #ff6b81;
+      --amber: #ffcc66;
+      --blue: #5aa9ff;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: radial-gradient(1200px 600px at 70% -10%, #16213f 0%, var(--bg) 60%); color: var(--txt); min-height: 100vh; }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 24px 18px 60px; }
+    header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+    h1 { font-size: 20px; margin: 0; font-weight: 650; letter-spacing: .2px; }
+    h1 small { display: block; color: var(--muted); font-size: 12px; font-weight: 400; margin-top: 3px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; }
+    .badge { font-size: 12px; padding: 6px 11px; border-radius: 999px; background: var(--panel2); border: 1px solid var(--line); color: var(--muted); display: flex; align-items: center; gap: 6px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+    .dot.on { background: var(--green); box-shadow: 0 0 8px var(--green); }
+    .dot.off { background: var(--red); }
+    .hero { background: linear-gradient(135deg, var(--panel) 0%, var(--panel2) 100%); border: 1px solid var(--line); border-radius: 18px; padding: 26px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .hero .state { font-size: 40px; font-weight: 750; letter-spacing: .3px; }
+    .hero .state.present { color: var(--green); }
+    .hero .state.empty { color: var(--muted); }
+    .hero .sub { color: var(--muted); font-size: 13px; margin-top: 6px; }
+    .ring { width: 96px; height: 96px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 20px; border: 6px solid var(--line); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin-bottom: 16px; }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+    .card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .6px; }
+    .card .value { font-size: 30px; font-weight: 700; margin-top: 6px; }
+    .card .unit { font-size: 15px; color: var(--muted); font-weight: 500; }
+    .card .note { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .chartcard { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin-bottom: 16px; }
+    .chartcard h2 { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .6px; margin: 0 0 10px; font-weight: 600; }
+    canvas { width: 100%; height: 140px; display: block; }
+    .foot { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: 10px; }
+    .kv { background: var(--panel2); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 12px; }
+    .kv b { color: var(--muted); font-weight: 500; display: block; margin-bottom: 2px; }
+    .kv span { word-break: break-all; }
+    details { margin-top: 14px; }
+    summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+    pre { background: #0a0f1e; border: 1px solid var(--line); border-radius: 10px; padding: 12px; overflow: auto; font-size: 12px; color: #b9c6e4; }
+    .stale { color: var(--amber) !important; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>ESP32-S3 IoT — Room Monitor
+        <small>Device-direct · senzori + prisustvo → MQTT → Node-RED (EM508E)</small>
+      </h1>
+      <div class="badges">
+        <div class="badge"><span id="mqttDot" class="dot"></span><span id="mqttTxt">MQTT ...</span></div>
+        <div class="badge"><span class="dot on"></span><span id="srcTxt">source ...</span></div>
+        <div class="badge"><span id="ageDot" class="dot"></span><span id="ageTxt">... </span></div>
+      </div>
+    </header>
+
+    <div class="hero">
+      <div>
+        <div id="state" class="state empty">—</div>
+        <div class="sub" id="stateSub">čekam podatke sa pločice…</div>
+      </div>
+      <div class="ring" id="confRing">—</div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="label">Temperatura</div>
+        <div class="value"><span id="temp">—</span><span class="unit"> °C</span></div>
+        <div class="note">DHT11 · GPIO4</div>
+      </div>
+      <div class="card">
+        <div class="label">Vlažnost</div>
+        <div class="value"><span id="hum">—</span><span class="unit"> %</span></div>
+        <div class="note">DHT11 · GPIO4</div>
+      </div>
+      <div class="card">
+        <div class="label">mmWave radar</div>
+        <div class="value" id="mmwave">—</div>
+        <div class="note">24 GHz · GPIO5 (pokret)</div>
+      </div>
+      <div class="card">
+        <div class="label">Pouzdanost</div>
+        <div class="value"><span id="conf">—</span><span class="unit"> %</span></div>
+        <div class="note" id="confNote">izvor prisustva</div>
+      </div>
+    </div>
+
+    <div class="chartcard">
+      <h2>Temperatura i vlažnost (uživo, zadnjih ~2 min)</h2>
+      <canvas id="chart" width="900" height="140"></canvas>
+    </div>
+
+    <div class="foot">
+      <div class="kv"><b>MQTT broker</b><span>broker.hivemq.com:1883</span></div>
+      <div class="kv"><b>Tema</b><span id="topic">—</span></div>
+      <div class="kv"><b>Izvor</b><span id="src2">—</span></div>
+      <div class="kv"><b>Zadnji update</b><span id="ts">—</span></div>
+    </div>
+
+    <details>
+      <summary>Sirovi JSON (REST /api/room-state)</summary>
+      <pre id="raw">…</pre>
+    </details>
+  </div>
+
+  <script>
+    const hist = [];            // {t, temp, hum}
+    const MAXH = 60;
+
+    function fmtTime(iso) {
+      if (!iso) return "—";
+      const d = new Date(iso);
+      if (isNaN(d)) return iso;
+      return d.toLocaleTimeString();
+    }
+
+    function drawChart() {
+      const c = document.getElementById("chart");
+      const dpr = window.devicePixelRatio || 1;
+      const w = c.clientWidth, h = 140;
+      c.width = w * dpr; c.height = h * dpr;
+      const ctx = c.getContext("2d");
+      ctx.scale(dpr, dpr);
+      ctx.clearRect(0, 0, w, h);
+      if (hist.length < 2) return;
+      const pad = 6;
+      const temps = hist.map(p => p.temp).filter(v => v != null);
+      const hums = hist.map(p => p.hum).filter(v => v != null);
+      const series = [
+        { data: hist.map(p => p.temp), color: "#5aa9ff", min: Math.min(...temps) - 1, max: Math.max(...temps) + 1 },
+        { data: hist.map(p => p.hum), color: "#3ad29f", min: Math.min(...hums) - 2, max: Math.max(...hums) + 2 },
+      ];
+      for (const s of series) {
+        const span = (s.max - s.min) || 1;
+        ctx.beginPath();
+        ctx.strokeStyle = s.color;
+        ctx.lineWidth = 2;
+        s.data.forEach((v, i) => {
+          if (v == null) return;
+          const x = pad + (w - 2 * pad) * (i / (hist.length - 1));
+          const y = h - pad - (h - 2 * pad) * ((v - s.min) / span);
+          if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+      }
+    }
+
+    async function tick() {
+      try {
+        const r = await fetch("/api/room-state", { cache: "no-store" });
+        const p = await r.json();
+        document.getElementById("raw").textContent = JSON.stringify(p, null, 2);
+
+        const present = p.state === "person_present";
+        const stateEl = document.getElementById("state");
+        stateEl.textContent = present ? "PRISUTAN" : (p.state === "empty_room" ? "PRAZNA SOBA" : (p.state || "—"));
+        stateEl.className = "state " + (present ? "present" : "empty");
+        document.getElementById("stateSub").textContent = present
+          ? "radar detektuje pokret u sobi"
+          : "nema pokreta (prazno ili osoba miruje)";
+
+        const conf = Math.round((Number(p.confidence) || 0) * 100);
+        document.getElementById("conf").textContent = conf;
+        document.getElementById("confRing").textContent = conf + "%";
+        document.getElementById("confRing").style.borderColor = present ? "var(--green)" : "var(--line)";
+
+        const t = (p.temperature_c != null) ? p.temperature_c : "—";
+        const h = (p.humidity_pct != null) ? p.humidity_pct : "—";
+        document.getElementById("temp").textContent = t;
+        document.getElementById("hum").textContent = h;
+        document.getElementById("mmwave").textContent = p.mmwave_present ? "prisutan" : "čisto";
+        document.getElementById("mmwave").style.color = p.mmwave_present ? "var(--green)" : "var(--muted)";
+
+        const topic = (p.mqtt && p.mqtt.topic) || "—";
+        document.getElementById("topic").textContent = topic;
+        document.getElementById("src2").textContent = p.source || "—";
+        document.getElementById("srcTxt").textContent = "source " + (p.source || "?");
+        document.getElementById("ts").textContent = fmtTime(p.ts_utc);
+
+        const mqttOnline = p.mqtt && p.mqtt.status === "online";
+        document.getElementById("mqttDot").className = "dot " + (mqttOnline ? "on" : "off");
+        document.getElementById("mqttTxt").textContent = mqttOnline ? "MQTT online" : "MQTT offline";
+
+        // svježina (koliko je stara poruka)
+        let ageSec = null;
+        if (p.ts_utc) { ageSec = (Date.now() - new Date(p.ts_utc).getTime()) / 1000; }
+        const ageDot = document.getElementById("ageDot");
+        const ageTxt = document.getElementById("ageTxt");
+        if (ageSec == null) { ageTxt.textContent = "—"; }
+        else if (ageSec < 8) { ageDot.className = "dot on"; ageTxt.textContent = "uživo (" + ageSec.toFixed(0) + "s)"; }
+        else { ageDot.className = "dot off"; ageTxt.textContent = "zastario (" + ageSec.toFixed(0) + "s)"; ageTxt.className = "stale"; }
+
+        // istorija za grafikon
+        if (typeof p.temperature_c === "number" || typeof p.humidity_pct === "number") {
+          hist.push({ t: Date.now(), temp: (typeof p.temperature_c === "number" ? p.temperature_c : null), hum: (typeof p.humidity_pct === "number" ? p.humidity_pct : null) });
+          while (hist.length > MAXH) hist.shift();
+          drawChart();
+        }
+      } catch (e) {
+        document.getElementById("mqttTxt").textContent = "REST greška";
+        document.getElementById("mqttDot").className = "dot off";
+      }
+    }
+
+    tick();
+    setInterval(tick, 2000);
+    window.addEventListener("resize", drawChart);
+  </script>
+</body>
+</html>

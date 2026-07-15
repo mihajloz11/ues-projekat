@@ -1,0 +1,157 @@
+{
+  "created_utc": "2026-06-17T20:17:17+00:00",
+  "task": "binary_presence",
+  "labels": [
+    "empty_room",
+    "person_present"
+  ],
+  "window_size": 8,
+  "hop": 2,
+  "hidden_size": 32,
+  "epochs": 60,
+  "window_level": {
+    "accuracy": 0.9844,
+    "per_class": {
+      "empty_room": {
+        "precision": 0.9776,
+        "recall": 0.9905,
+        "f1": 0.984
+      },
+      "person_present": {
+        "precision": 0.9909,
+        "recall": 0.9785,
+        "f1": 0.9847
+      }
+    },
+    "confusion": {
+      "empty_room": {
+        "empty_room": 3232,
+        "person_present": 31
+      },
+      "person_present": {
+        "person_present": 3374,
+        "empty_room": 74
+      }
+    }
+  },
+  "session_level": {
+    "accuracy": 0.7551,
+    "test_windows": 26842,
+    "per_class": {
+      "empty_room": {
+        "precision": 0.8962,
+        "recall": 0.5614,
+        "f1": 0.6903
+      },
+      "person_present": {
+        "precision": 0.6933,
+        "recall": 0.9384,
+        "f1": 0.7974
+      }
+    },
+    "confusion": {
+      "empty_room": {
+        "empty_room": 7327,
+        "person_present": 5725
+      },
+      "person_present": {
+        "person_present": 12941,
+        "empty_room": 849
+      }
+    },
+    "per_session": [
+      {
+        "name": "empty_room_20260518_215156",
+        "source_label": "empty_room",
+        "test_windows": 1449,
+        "accuracy": 0.9945
+      },
+      {
+        "name": "empty_room_5min_20260520_131234",
+        "source_label": "empty_room",
+        "test_windows": 5588,
+        "accuracy": 0.0016
+      },
+      {
+        "name": "empty_room_run1_20260518_225758",
+        "source_label": "empty_room",
+        "test_windows": 2114,
+        "accuracy": 0.992
+      },
+      {
+        "name": "empty_room_run2_20260518_230339",
+        "source_label": "empty_room",
+        "test_windows": 1955,
+        "accuracy": 0.9519
+      },
+      {
+        "name": "empty_room_run3_20260518_230858",
+        "source_label": "empty_room",
+        "test_windows": 1946,
+        "accuracy": 0.9861
+      },
+      {
+        "name": "person_present_or_moving_20260518_224146",
+        "source_label": "person_present_or_moving",
+        "test_windows": 1728,
+        "accuracy": 0.8582
+      },
+      {
+        "name": "person_present_or_moving_5min_20260519_212030",
+        "source_label": "person_present_or_moving",
+        "test_windows": 2279,
+        "accuracy": 0.9855
+      },
+      {
+        "name": "zone_door_left_3min_20260528_214838",
+        "source_label": "zone_door_left",
+        "test_windows": 1213,
+        "accuracy": 1.0
+      },
+      {
+        "name": "zone_door_left_extra_5min_20260603_125522",
+        "source_label": "zone_door_left",
+        "test_windows": 1254,
+        "accuracy": 0.9936
+      },
+      {
+        "name": "zone_middle_3min_20260528_213748",
+        "source_label": "zone_middle",
+        "test_windows": 1484,
+        "accuracy": 0.8733
+      },
+      {
+        "name": "zone_middle_extra_5min_20260603_122242",
+        "source_label": "zone_middle",
+        "test_windows": 1197,
+        "accuracy": 0.9624
+      },
+      {
+        "name": "bed_lying_5min_20260531_121946",
+        "source_label": "zone_bed_right",
+        "test_windows": 1282,
+        "accuracy": 0.9594
+      },
+      {
+        "name": "bed_lying_extra_5min_20260531_124207",
+        "source_label": "zone_bed_right",
+        "test_windows": 1084,
+        "accuracy": 0.7435
+      },
+      {
+        "name": "bed_lying_extra_5min_20260603_121107",
+        "source_label": "zone_bed_right",
+        "test_windows": 1123,
+        "accuracy": 1.0
+      },
+      {
+        "name": "zone_bed_right_3min_20260528_214302",
+        "source_label": "zone_bed_right",
+        "test_windows": 1146,
+        "accuracy": 1.0
+      }
+    ]
+  },
+  "leakage_gap": 0.2293,
+  "note": "leakage_gap = window-level minus session-level accuracy; large gap means the random split overstates real performance."
+}

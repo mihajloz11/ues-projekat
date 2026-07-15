@@ -1,0 +1,103 @@
+{
+  "session": "data\\raw\\person_still\\20260627_122318",
+  "phases": [
+    {
+      "phase": "settle",
+      "target_bpm": null,
+      "raw": {
+        "bpm": 9.2,
+        "n_vote": 14,
+        "spread_bpm": 0.0
+      },
+      "cscr": {
+        "bpm": 12.2,
+        "n_vote": 10,
+        "spread_bpm": 3.9
+      }
+    },
+    {
+      "phase": "natural",
+      "target_bpm": null,
+      "raw": {
+        "bpm": 12.9,
+        "n_vote": 165,
+        "spread_bpm": 2.2
+      },
+      "cscr": {
+        "bpm": 14.6,
+        "n_vote": 158,
+        "spread_bpm": 3.1
+      }
+    },
+    {
+      "phase": "metronome_12bpm",
+      "target_bpm": 12,
+      "raw": {
+        "bpm": 15.0,
+        "n_vote": 109,
+        "spread_bpm": 2.7
+      },
+      "cscr": {
+        "bpm": 15.5,
+        "n_vote": 130,
+        "spread_bpm": 5.9
+      }
+    },
+    {
+      "phase": "metronome_15bpm",
+      "target_bpm": 15,
+      "raw": {
+        "bpm": 14.0,
+        "n_vote": 62,
+        "spread_bpm": 4.3
+      },
+      "cscr": {
+        "bpm": 12.0,
+        "n_vote": 122,
+        "spread_bpm": 4.9
+      }
+    },
+    {
+      "phase": "metronome_20bpm",
+      "target_bpm": 20,
+      "raw": {
+        "bpm": 16.0,
+        "n_vote": 98,
+        "spread_bpm": 3.8
+      },
+      "cscr": {
+        "bpm": 14.0,
+        "n_vote": 80,
+        "spread_bpm": 5.9
+      }
+    },
+    {
+      "phase": "breath_hold_apnea",
+      "target_bpm": 0,
+      "raw": {
+        "bpm": 27.0,
+        "n_vote": 42,
+        "spread_bpm": 6.8
+      },
+      "cscr": {
+        "bpm": 15.0,
+        "n_vote": 33,
+        "spread_bpm": 5.3
+      }
+    },
+    {
+      "phase": "natural_recover",
+      "target_bpm": null,
+      "raw": {
+        "bpm": 12.0,
+        "n_vote": 134,
+        "spread_bpm": 3.4
+      },
+      "cscr": {
+        "bpm": 13.2,
+        "n_vote": 147,
+        "spread_bpm": 6.3
+      }
+    }
+  ]
+}

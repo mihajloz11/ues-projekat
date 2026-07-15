@@ -1,0 +1,23 @@
+{
+  "started_utc": "2026-06-27T10:14:07.420+00:00",
+  "port": "COM3",
+  "baud": 921600,
+  "label": "walking",
+  "protocol": "walking",
+  "raw_log": "data\\raw\\walking\\20260627_121352\\raw_serial.log",
+  "jsonl": "data\\raw\\walking\\20260627_121352\\records.jsonl",
+  "notes": "Guided protocol capture. ts_mono is monotonic host seconds; phases carry breathing ground truth.",
+  "phases": [
+    {
+      "name": "walk",
+      "target_bpm": null,
+      "start_mono": 0.032,
+      "start_utc": "2026-06-27T10:14:07.448+00:00",
+      "end_utc": "2026-06-27T10:19:07.429+00:00"
+    }
+  ],
+  "ended_utc": "2026-06-27T10:19:07.430+00:00",
+  "lines": 21312,
+  "csi_frames": 12675,
+  "effective_fps": 42.2
+}

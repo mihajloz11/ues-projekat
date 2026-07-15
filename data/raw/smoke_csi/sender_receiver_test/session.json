@@ -1,0 +1,11 @@
+{
+  "started_utc": "2026-05-18T18:46:59+00:00",
+  "port": "COM3",
+  "baud": 921600,
+  "label": "smoke_csi",
+  "raw_log": "data\\raw\\smoke_csi\\sender_receiver_test\\raw_serial.log",
+  "jsonl": "data\\raw\\smoke_csi\\sender_receiver_test\\records.jsonl",
+  "notes": "CSI receiver session. Keep hardware layout and room state stable during capture.",
+  "ended_utc": "2026-05-18T18:46:59+00:00",
+  "lines": 20
+}

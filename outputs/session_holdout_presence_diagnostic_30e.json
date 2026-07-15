@@ -1,0 +1,779 @@
+{
+  "created_utc": "2026-06-14T09:17:42+00:00",
+  "mode": "session_level_holdout",
+  "binary_presence": true,
+  "window_size": 8,
+  "hop": 2,
+  "hidden_size": 32,
+  "epochs": 30,
+  "labels": [
+    "empty_room",
+    "person_present"
+  ],
+  "sessions": [
+    {
+      "source_label": "empty_room",
+      "target_label": "empty_room",
+      "path": "data\\raw\\empty_room\\empty_room_20260518_215156\\records.jsonl",
+      "frames": 2905,
+      "windows": 1449
+    },
+    {
+      "source_label": "empty_room",
+      "target_label": "empty_room",
+      "path": "data\\raw\\empty_room\\empty_room_5min_20260520_131234\\records.jsonl",
+      "frames": 11183,
+      "windows": 5588
+    },
+    {
+      "source_label": "empty_room",
+      "target_label": "empty_room",
+      "path": "data\\raw\\empty_room\\empty_room_run1_20260518_225758\\records.jsonl",
+      "frames": 4234,
+      "windows": 2114
+    },
+    {
+      "source_label": "empty_room",
+      "target_label": "empty_room",
+      "path": "data\\raw\\empty_room\\empty_room_run2_20260518_230339\\records.jsonl",
+      "frames": 3917,
+      "windows": 1955
+    },
+    {
+      "source_label": "empty_room",
+      "target_label": "empty_room",
+      "path": "data\\raw\\empty_room\\empty_room_run3_20260518_230858\\records.jsonl",
+      "frames": 3899,
+      "windows": 1946
+    },
+    {
+      "source_label": "person_present_or_moving",
+      "target_label": "person_present",
+      "path": "data\\raw\\person_present_or_moving\\person_present_or_moving_20260518_224146\\records.jsonl",
+      "frames": 3463,
+      "windows": 1728
+    },
+    {
+      "source_label": "person_present_or_moving",
+      "target_label": "person_present",
+      "path": "data\\raw\\person_present_or_moving\\person_present_or_moving_5min_20260519_212030\\records.jsonl",
+      "frames": 4565,
+      "windows": 2279
+    },
+    {
+      "source_label": "zone_door_left",
+      "target_label": "person_present",
+      "path": "data\\raw\\zone_door_left\\zone_door_left_3min_20260528_214838\\records.jsonl",
+      "frames": 2433,
+      "windows": 1213
+    },
+    {
+      "source_label": "zone_door_left",
+      "target_label": "person_present",
+      "path": "data\\raw\\zone_door_left\\zone_door_left_extra_5min_20260603_125522\\records.jsonl",
+      "frames": 2514,
+      "windows": 1254
+    },
+    {
+      "source_label": "zone_middle",
+      "target_label": "person_present",
+      "path": "data\\raw\\zone_middle\\zone_middle_3min_20260528_213748\\records.jsonl",
+      "frames": 2974,
+      "windows": 1484
+    },
+    {
+      "source_label": "zone_middle",
+      "target_label": "person_present",
+      "path": "data\\raw\\zone_middle\\zone_middle_extra_5min_20260603_122242\\records.jsonl",
+      "frames": 2401,
+      "windows": 1197
+    },
+    {
+      "source_label": "zone_bed_right",
+      "target_label": "person_present",
+      "path": "data\\raw\\zone_bed_right\\bed_lying_5min_20260531_121946\\records.jsonl",
+      "frames": 2571,
+      "windows": 1282
+    },
+    {
+      "source_label": "zone_bed_right",
+      "target_label": "person_present",
+      "path": "data\\raw\\zone_bed_right\\bed_lying_extra_5min_20260531_124207\\records.jsonl",
+      "frames": 2175,
+      "windows": 1084
+    },
+    {
+      "source_label": "zone_bed_right",
+      "target_label": "person_present",
+      "path": "data\\raw\\zone_bed_right\\bed_lying_extra_5min_20260603_121107\\records.jsonl",
+      "frames": 2252,
+      "windows": 1123
+    },
+    {
+      "source_label": "zone_bed_right",
+      "target_label": "person_present",
+      "path": "data\\raw\\zone_bed_right\\zone_bed_right_3min_20260528_214302\\records.jsonl",
+      "frames": 2298,
+      "windows": 1146
+    }
+  ],
+  "holdout_count": 15,
+  "aggregate": {
+    "accuracy": 0.9366,
+    "test_windows": 26842,
+    "per_class": {
+      "empty_room": {
+        "precision": 0.9153,
+        "recall": 0.9582,
+        "f1": 0.9363
+      },
+      "person_present": {
+        "precision": 0.9586,
+        "recall": 0.916,
+        "f1": 0.9368
+      }
+    },
+    "confusion": {
+      "empty_room": {
+        "empty_room": 12507,
+        "person_present": 545
+      },
+      "person_present": {
+        "person_present": 12632,
+        "empty_room": 1158
+      }
+    }
+  },
+  "results": [
+    {
+      "holdout_path": "data\\raw\\empty_room\\empty_room_20260518_215156\\records.jsonl",
+      "source_label": "empty_room",
+      "target_label": "empty_room",
+      "test_windows": 1449,
+      "accuracy": 0.9903,
+      "per_class": {
+        "empty_room": {
+          "precision": 1.0,
+          "recall": 0.9903,
+          "f1": 0.9951
+        },
+        "person_present": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": {
+        "empty_room": {
+          "empty_room": 1435,
+          "person_present": 14
+        }
+      },
+      "training_tail": [
+        {
+          "epoch": 24,
+          "loss": 0.099219,
+          "accuracy": 0.9764
+        },
+        {
+          "epoch": 27,
+          "loss": 0.094341,
+          "accuracy": 0.9779
+        },
+        {
+          "epoch": 30,
+          "loss": 0.090351,
+          "accuracy": 0.9787
+        }
+      ]
+    },
+    {
+      "holdout_path": "data\\raw\\empty_room\\empty_room_5min_20260520_131234\\records.jsonl",
+      "source_label": "empty_room",
+      "target_label": "empty_room",
+      "test_windows": 5588,
+      "accuracy": 0.9449,
+      "per_class": {
+        "empty_room": {
+          "precision": 1.0,
+          "recall": 0.9449,
+          "f1": 0.9717
+        },
+        "person_present": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": {
+        "empty_room": {
+          "empty_room": 5280,
+          "person_present": 308
+        }
+      },
+      "training_tail": [
+        {
+          "epoch": 24,
+          "loss": 0.106977,
+          "accuracy": 0.9699
+        },
+        {
+          "epoch": 27,
+          "loss": 0.101393,
+          "accuracy": 0.9725
+        },
+        {
+          "epoch": 30,
+          "loss": 0.096572,
+          "accuracy": 0.9741
+        }
+      ]
+    },
+    {
+      "holdout_path": "data\\raw\\empty_room\\empty_room_run1_20260518_225758\\records.jsonl",
+      "source_label": "empty_room",
+      "target_label": "empty_room",
+      "test_windows": 2114,
+      "accuracy": 0.9924,
+      "per_class": {
+        "empty_room": {
+          "precision": 1.0,
+          "recall": 0.9924,
+          "f1": 0.9962
+        },
+        "person_present": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": {
+        "empty_room": {
+          "empty_room": 2098,
+          "person_present": 16
+        }
+      },
+      "training_tail": [
+        {
+          "epoch": 24,
+          "loss": 0.101964,
+          "accuracy": 0.9744
+        },
+        {
+          "epoch": 27,
+          "loss": 0.096924,
+          "accuracy": 0.9765
+        },
+        {
+          "epoch": 30,
+          "loss": 0.092743,
+          "accuracy": 0.9777
+        }
+      ]
+    },
+    {
+      "holdout_path": "data\\raw\\empty_room\\empty_room_run2_20260518_230339\\records.jsonl",
+      "source_label": "empty_room",
+      "target_label": "empty_room",
+      "test_windows": 1955,
+      "accuracy": 0.912,
+      "per_class": {
+        "empty_room": {
+          "precision": 1.0,
+          "recall": 0.912,
+          "f1": 0.954
+        },
+        "person_present": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": {
+        "empty_room": {
+          "empty_room": 1783,
+          "person_present": 172
+        }
+      },
+      "training_tail": [
+        {
+          "epoch": 24,
+          "loss": 0.088606,
+          "accuracy": 0.9791
+        },
+        {
+          "epoch": 27,
+          "loss": 0.084478,
+          "accuracy": 0.9802
+        },
+        {
+          "epoch": 30,
+          "loss": 0.080969,
+          "accuracy": 0.9818
+        }
+      ]
+    },
+    {
+      "holdout_path": "data\\raw\\empty_room\\empty_room_run3_20260518_230858\\records.jsonl",
+      "source_label": "empty_room",
+      "target_label": "empty_room",
+      "test_windows": 1946,
+      "accuracy": 0.982,
+      "per_class": {
+        "empty_room": {
+          "precision": 1.0,
+          "recall": 0.982,
+          "f1": 0.9909
+        },
+        "person_present": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "confusion": {
+        "empty_room": {
+          "empty_room": 1911,
+          "person_present": 35
+        }
+      },
+      "training_tail": [
+        {
+          "epoch": 24,
+          "loss": 0.094453,
+          "accuracy": 0.9781
+        },
+        {
+          "epoch": 27,
+          "loss": 0.090177,
+          "accuracy": 0.9788
+        },
+        {
+          "epoch": 30,
+          "loss": 0.086593,
+          "accuracy": 0.9798
+        }
+      ]
+    },
+    {
+      "holdout_path": "data\\raw\\person_present_or_moving\\person_present_or_moving_20260518_224146\\records.jsonl",
+      "source_label": "person_present_or_moving",
+      "target_label": "person_present",
+      "test_windows": 1728,
+      "accuracy": 0.8391,
+      "per_class": {
+        "empty_room": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "person_present": {
+          "precision": 1.0,
+          "recall": 0.8391,
+          "f1": 0.9125
+        }
+      },
+      "confusion": {
+        "person_present": {
+          "person_present": 1450,
+          "empty_room": 278
+        }
+      },
+      "training_tail": [
+        {
+          "epoch": 24,
+          "loss": 0.091218,
+          "accuracy": 0.9784
+        },
+        {
+          "epoch": 27,
+          "loss": 0.08595,
+          "accuracy": 0.9806
+        },
+        {
+          "epoch": 30,
+          "loss": 0.08139,
+          "accuracy": 0.9829
+        }
+      ]
+    },
+    {
+      "holdout_path": "data\\raw\\person_present_or_moving\\person_present_or_moving_5min_20260519_212030\\records.jsonl",
+      "source_label": "person_present_or_moving",
+      "target_label": "person_present",
+      "test_windows": 2279,
+      "accuracy": 0.9746,
+      "per_class": {
+        "empty_room": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "person_present": {
+          "precision": 1.0,
+          "recall": 0.9746,
+          "f1": 0.9871
+        }
+      },
+      "confusion": {
+        "person_present": {
+          "person_present": 2221,
+          "empty_room": 58
+        }
+      },
+      "training_tail": [
+        {
+          "epoch": 24,
+          "loss": 0.099532,
+          "accuracy": 0.9773
+        },
+        {
+          "epoch": 27,
+          "loss": 0.095522,
+          "accuracy": 0.9786
+        },
+        {
+          "epoch": 30,
+          "loss": 0.092248,
+          "accuracy": 0.9792
+        }
+      ]
+    },
+    {
+      "holdout_path": "data\\raw\\zone_door_left\\zone_door_left_3min_20260528_214838\\records.jsonl",
+      "source_label": "zone_door_left",
+      "target_label": "person_present",
+      "test_windows": 1213,
+      "accuracy": 1.0,
+      "per_class": {
+        "empty_room": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "person_present": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      },
+      "confusion": {
+        "person_present": {
+          "person_present": 1213
+        }
+      },
+      "training_tail": [
+        {
+          "epoch": 24,
+          "loss": 0.097752,
+          "accuracy": 0.9781
+        },
+        {
+          "epoch": 27,
+          "loss": 0.093378,
+          "accuracy": 0.9789
+        },
+        {
+          "epoch": 30,
+          "loss": 0.0898,
+          "accuracy": 0.9795
+        }
+      ]
+    },
+    {
+      "holdout_path": "data\\raw\\zone_door_left\\zone_door_left_extra_5min_20260603_125522\\records.jsonl",
+      "source_label": "zone_door_left",
+      "target_label": "person_present",
+      "test_windows": 1254,
+      "accuracy": 1.0,
+      "per_class": {
+        "empty_room": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "person_present": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      },
+      "confusion": {
+        "person_present": {
+          "person_present": 1254
+        }
+      },
+      "training_tail": [
+        {
+          "epoch": 24,
+          "loss": 0.095416,
+          "accuracy": 0.9803
+        },
+        {
+          "epoch": 27,
+          "loss": 0.090301,
+          "accuracy": 0.9811
+        },
+        {
+          "epoch": 30,
+          "loss": 0.086014,
+          "accuracy": 0.9821
+        }
+      ]
+    },
+    {
+      "holdout_path": "data\\raw\\zone_middle\\zone_middle_3min_20260528_213748\\records.jsonl",
+      "source_label": "zone_middle",
+      "target_label": "person_present",
+      "test_windows": 1484,
+      "accuracy": 0.8524,
+      "per_class": {
+        "empty_room": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "person_present": {
+          "precision": 1.0,
+          "recall": 0.8524,
+          "f1": 0.9203
+        }
+      },
+      "confusion": {
+        "person_present": {
+          "empty_room": 219,
+          "person_present": 1265
+        }
+      },
+      "training_tail": [
+        {
+          "epoch": 24,
+          "loss": 0.096037,
+          "accuracy": 0.9785
+        },
+        {
+          "epoch": 27,
+          "loss": 0.0916,
+          "accuracy": 0.9792
+        },
+        {
+          "epoch": 30,
+          "loss": 0.088089,
+          "accuracy": 0.9796
+        }
+      ]
+    },
+    {
+      "holdout_path": "data\\raw\\zone_middle\\zone_middle_extra_5min_20260603_122242\\records.jsonl",
+      "source_label": "zone_middle",
+      "target_label": "person_present",
+      "test_windows": 1197,
+      "accuracy": 0.9632,
+      "per_class": {
+        "empty_room": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "person_present": {
+          "precision": 1.0,
+          "recall": 0.9632,
+          "f1": 0.9813
+        }
+      },
+      "confusion": {
+        "person_present": {
+          "person_present": 1153,
+          "empty_room": 44
+        }
+      },
+      "training_tail": [
+        {
+          "epoch": 24,
+          "loss": 0.096644,
+          "accuracy": 0.9784
+        },
+        {
+          "epoch": 27,
+          "loss": 0.092137,
+          "accuracy": 0.9795
+        },
+        {
+          "epoch": 30,
+          "loss": 0.088461,
+          "accuracy": 0.9801
+        }
+      ]
+    },
+    {
+      "holdout_path": "data\\raw\\zone_bed_right\\bed_lying_5min_20260531_121946\\records.jsonl",
+      "source_label": "zone_bed_right",
+      "target_label": "person_present",
+      "test_windows": 1282,
+      "accuracy": 0.9633,
+      "per_class": {
+        "empty_room": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "person_present": {
+          "precision": 1.0,
+          "recall": 0.9633,
+          "f1": 0.9813
+        }
+      },
+      "confusion": {
+        "person_present": {
+          "person_present": 1235,
+          "empty_room": 47
+        }
+      },
+      "training_tail": [
+        {
+          "epoch": 24,
+          "loss": 0.096386,
+          "accuracy": 0.9796
+        },
+        {
+          "epoch": 27,
+          "loss": 0.091609,
+          "accuracy": 0.9811
+        },
+        {
+          "epoch": 30,
+          "loss": 0.087687,
+          "accuracy": 0.9819
+        }
+      ]
+    },
+    {
+      "holdout_path": "data\\raw\\zone_bed_right\\bed_lying_extra_5min_20260531_124207\\records.jsonl",
+      "source_label": "zone_bed_right",
+      "target_label": "person_present",
+      "test_windows": 1084,
+      "accuracy": 0.5277,
+      "per_class": {
+        "empty_room": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "person_present": {
+          "precision": 1.0,
+          "recall": 0.5277,
+          "f1": 0.6908
+        }
+      },
+      "confusion": {
+        "person_present": {
+          "empty_room": 512,
+          "person_present": 572
+        }
+      },
+      "training_tail": [
+        {
+          "epoch": 24,
+          "loss": 0.085802,
+          "accuracy": 0.9802
+        },
+        {
+          "epoch": 27,
+          "loss": 0.082066,
+          "accuracy": 0.9808
+        },
+        {
+          "epoch": 30,
+          "loss": 0.078956,
+          "accuracy": 0.9814
+        }
+      ]
+    },
+    {
+      "holdout_path": "data\\raw\\zone_bed_right\\bed_lying_extra_5min_20260603_121107\\records.jsonl",
+      "source_label": "zone_bed_right",
+      "target_label": "person_present",
+      "test_windows": 1123,
+      "accuracy": 1.0,
+      "per_class": {
+        "empty_room": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "person_present": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      },
+      "confusion": {
+        "person_present": {
+          "person_present": 1123
+        }
+      },
+      "training_tail": [
+        {
+          "epoch": 24,
+          "loss": 0.096381,
+          "accuracy": 0.9796
+        },
+        {
+          "epoch": 27,
+          "loss": 0.090945,
+          "accuracy": 0.9807
+        },
+        {
+          "epoch": 30,
+          "loss": 0.086586,
+          "accuracy": 0.9813
+        }
+      ]
+    },
+    {
+      "holdout_path": "data\\raw\\zone_bed_right\\zone_bed_right_3min_20260528_214302\\records.jsonl",
+      "source_label": "zone_bed_right",
+      "target_label": "person_present",
+      "test_windows": 1146,
+      "accuracy": 1.0,
+      "per_class": {
+        "empty_room": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "person_present": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      },
+      "confusion": {
+        "person_present": {
+          "person_present": 1146
+        }
+      },
+      "training_tail": [
+        {
+          "epoch": 24,
+          "loss": 0.098133,
+          "accuracy": 0.9789
+        },
+        {
+          "epoch": 27,
+          "loss": 0.093399,
+          "accuracy": 0.9806
+        },
+        {
+          "epoch": 30,
+          "loss": 0.089488,
+          "accuracy": 0.9811
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Each result trains without the listed holdout session and tests on that whole session.",
+    "This is slower but more defensible than a random window-level split."
+  ]
+}

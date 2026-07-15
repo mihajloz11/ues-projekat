@@ -1,0 +1,443 @@
+{
+  "sessions": [
+    {
+      "id": "empty_room/20260618_212756",
+      "y": 0,
+      "fps": 37.5
+    },
+    {
+      "id": "empty_room/empty_room_20260518_215156",
+      "y": 0,
+      "fps": 16.2
+    },
+    {
+      "id": "empty_room/empty_room_5min_20260520_131234",
+      "y": 0,
+      "fps": 37.3
+    },
+    {
+      "id": "empty_room/empty_room_run1_20260518_225758",
+      "y": 0,
+      "fps": 14.1
+    },
+    {
+      "id": "empty_room/empty_room_run2_20260518_230339",
+      "y": 0,
+      "fps": 13.1
+    },
+    {
+      "id": "empty_room/empty_room_run3_20260518_230858",
+      "y": 0,
+      "fps": 13.0
+    },
+    {
+      "id": "walking/20260618_215415",
+      "y": 1,
+      "fps": 38.0
+    },
+    {
+      "id": "person_present_or_moving/person_present_or_moving_20260518_224146",
+      "y": 1,
+      "fps": 19.2
+    },
+    {
+      "id": "person_present_or_moving/person_present_or_moving_5min_20260519_212030",
+      "y": 1,
+      "fps": 15.2
+    },
+    {
+      "id": "person_still/20260618_214534",
+      "y": 1,
+      "fps": 38.3
+    },
+    {
+      "id": "zone_bed_right/bed_lying_5min_20260531_121946",
+      "y": 1,
+      "fps": 8.6
+    },
+    {
+      "id": "zone_bed_right/bed_lying_extra_5min_20260531_124207",
+      "y": 1,
+      "fps": 0.7
+    },
+    {
+      "id": "zone_bed_right/bed_lying_extra_5min_20260603_121107",
+      "y": 1,
+      "fps": 7.5
+    },
+    {
+      "id": "zone_bed_right/zone_bed_right_3min_20260528_214302",
+      "y": 1,
+      "fps": 12.8
+    },
+    {
+      "id": "zone_desk_chair/desk_chair_3min_20260614_133209",
+      "y": 1,
+      "fps": 42.7
+    },
+    {
+      "id": "zone_door_left/zone_door_left_3min_20260528_214838",
+      "y": 1,
+      "fps": 13.5
+    },
+    {
+      "id": "zone_door_left/zone_door_left_extra_5min_20260603_125522",
+      "y": 1,
+      "fps": 8.4
+    },
+    {
+      "id": "zone_middle/zone_middle_3min_20260528_213748",
+      "y": 1,
+      "fps": 16.5
+    },
+    {
+      "id": "zone_middle/zone_middle_extra_5min_20260603_122242",
+      "y": 1,
+      "fps": 8.0
+    }
+  ],
+  "common_subcarriers": 192,
+  "winner": {
+    "representation": "old",
+    "model": "randomforest",
+    "macro_sess_acc": 0.7592
+  },
+  "results": {
+    "old": {
+      "feat_dim": 391,
+      "total_windows": 4750,
+      "models": {
+        "dsp_threshold": {
+          "pooled_acc": 0.5352,
+          "macro_sess_acc": 0.5352,
+          "recall_empty": 0.0167,
+          "recall_occupied": 0.7745,
+          "per_session": [
+            0.064,
+            0.024,
+            0.0,
+            0.004,
+            0.008,
+            0.0,
+            0.624,
+            0.816,
+            0.852,
+            0.848,
+            0.924,
+            0.54,
+            0.628,
+            0.984,
+            0.524,
+            0.964,
+            0.92,
+            0.876,
+            0.568
+          ]
+        },
+        "logreg": {
+          "pooled_acc": 0.6834,
+          "macro_sess_acc": 0.6834,
+          "recall_empty": 0.4987,
+          "recall_occupied": 0.7686,
+          "per_session": [
+            0.0,
+            0.412,
+            0.0,
+            0.784,
+            0.864,
+            0.932,
+            0.9,
+            0.12,
+            0.96,
+            0.1,
+            0.912,
+            0.82,
+            0.996,
+            1.0,
+            0.248,
+            1.0,
+            1.0,
+            0.94,
+            0.996
+          ]
+        },
+        "linsvm": {
+          "pooled_acc": 0.6737,
+          "macro_sess_acc": 0.6737,
+          "recall_empty": 0.482,
+          "recall_occupied": 0.7622,
+          "per_session": [
+            0.0,
+            0.304,
+            0.0,
+            0.792,
+            0.868,
+            0.928,
+            0.864,
+            0.104,
+            0.952,
+            0.136,
+            0.912,
+            0.824,
+            0.98,
+            0.996,
+            0.248,
+            1.0,
+            1.0,
+            0.9,
+            0.992
+          ]
+        },
+        "rbfsvm": {
+          "pooled_acc": 0.6615,
+          "macro_sess_acc": 0.6615,
+          "recall_empty": 0.494,
+          "recall_occupied": 0.7388,
+          "per_session": [
+            0.0,
+            0.164,
+            0.0,
+            0.892,
+            0.928,
+            0.98,
+            0.916,
+            0.344,
+            0.88,
+            0.136,
+            0.428,
+            0.444,
+            1.0,
+            1.0,
+            0.696,
+            1.0,
+            0.996,
+            0.764,
+            1.0
+          ]
+        },
+        "randomforest": {
+          "pooled_acc": 0.7592,
+          "macro_sess_acc": 0.7592,
+          "recall_empty": 0.4893,
+          "recall_occupied": 0.8837,
+          "per_session": [
+            0.0,
+            0.0,
+            0.0,
+            0.992,
+            0.964,
+            0.98,
+            0.96,
+            0.808,
+            1.0,
+            0.98,
+            0.404,
+            0.408,
+            1.0,
+            1.0,
+            0.928,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "mlp": {
+          "pooled_acc": 0.6808,
+          "macro_sess_acc": 0.6808,
+          "recall_empty": 0.4567,
+          "recall_occupied": 0.7843,
+          "per_session": [
+            0.0,
+            0.1,
+            0.0,
+            0.692,
+            0.956,
+            0.992,
+            0.872,
+            0.456,
+            0.98,
+            0.3,
+            0.396,
+            0.448,
+            1.0,
+            1.0,
+            0.832,
+            1.0,
+            1.0,
+            0.912,
+            1.0
+          ]
+        }
+      }
+    },
+    "new": {
+      "feat_dim": 392,
+      "total_windows": 4692,
+      "models": {
+        "dsp_threshold": {
+          "pooled_acc": 0.581,
+          "macro_sess_acc": 0.5792,
+          "recall_empty": 0.6881,
+          "recall_occupied": 0.5311,
+          "per_session": [
+            0.252,
+            0.996,
+            0.012,
+            0.968,
+            0.936,
+            0.976,
+            0.96,
+            0.179,
+            0.676,
+            0.768,
+            0.208,
+            0.392,
+            0.268,
+            0.088,
+            0.933,
+            0.281,
+            0.84,
+            0.301,
+            0.972
+          ]
+        },
+        "logreg": {
+          "pooled_acc": 0.6775,
+          "macro_sess_acc": 0.6797,
+          "recall_empty": 0.4178,
+          "recall_occupied": 0.7985,
+          "per_session": [
+            0.0,
+            0.373,
+            0.0,
+            0.684,
+            0.7,
+            0.748,
+            0.976,
+            0.618,
+            0.788,
+            0.036,
+            0.808,
+            0.564,
+            0.732,
+            0.982,
+            0.937,
+            0.992,
+            0.984,
+            0.992,
+            1.0
+          ]
+        },
+        "linsvm": {
+          "pooled_acc": 0.6773,
+          "macro_sess_acc": 0.6795,
+          "recall_empty": 0.4272,
+          "recall_occupied": 0.7938,
+          "per_session": [
+            0.0,
+            0.423,
+            0.0,
+            0.704,
+            0.7,
+            0.736,
+            0.98,
+            0.614,
+            0.736,
+            0.056,
+            0.776,
+            0.64,
+            0.744,
+            0.974,
+            0.916,
+            0.979,
+            0.952,
+            0.98,
+            1.0
+          ]
+        },
+        "rbfsvm": {
+          "pooled_acc": 0.7165,
+          "macro_sess_acc": 0.7183,
+          "recall_empty": 0.4695,
+          "recall_occupied": 0.8316,
+          "per_session": [
+            0.004,
+            0.473,
+            0.0,
+            0.596,
+            0.856,
+            0.888,
+            0.984,
+            0.606,
+            0.832,
+            0.064,
+            0.86,
+            0.712,
+            0.872,
+            0.952,
+            0.958,
+            1.0,
+            0.996,
+            1.0,
+            0.996
+          ]
+        },
+        "randomforest": {
+          "pooled_acc": 0.7315,
+          "macro_sess_acc": 0.7326,
+          "recall_empty": 0.4326,
+          "recall_occupied": 0.8707,
+          "per_session": [
+            0.004,
+            0.087,
+            0.0,
+            0.812,
+            0.86,
+            0.82,
+            1.0,
+            0.776,
+            0.896,
+            0.112,
+            0.976,
+            0.784,
+            0.908,
+            0.969,
+            0.967,
+            0.992,
+            1.0,
+            1.0,
+            0.956
+          ]
+        },
+        "mlp": {
+          "pooled_acc": 0.6912,
+          "macro_sess_acc": 0.6928,
+          "recall_empty": 0.4272,
+          "recall_occupied": 0.8141,
+          "per_session": [
+            0.0,
+            0.232,
+            0.0,
+            0.568,
+            0.864,
+            0.892,
+            0.988,
+            0.642,
+            0.788,
+            0.064,
+            0.74,
+            0.656,
+            0.932,
+            0.987,
+            0.862,
+            1.0,
+            0.956,
+            0.996,
+            0.996
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "session": "zone_bed_right_3min_20260528_214302",
+  "folder": "data\\raw\\zone_bed_right\\zone_bed_right_3min_20260528_214302",
+  "records": 5262,
+  "csi_records": 2338,
+  "csi_lengths": [
+    0,
+    384
+  ],
+  "raw_bytes": 3617467,
+  "jsonl_bytes": 5040009,
+  "amp_mean_abs_avg": 33.5984,
+  "metadata": {
+    "started_utc": "2026-05-28T19:43:02+00:00",
+    "port": "COM3",
+    "baud": 921600,
+    "label": "zone_bed_right",
+    "raw_log": "data\\raw\\zone_bed_right\\zone_bed_right_3min_20260528_214302\\raw_serial.log",
+    "jsonl": "data\\raw\\zone_bed_right\\zone_bed_right_3min_20260528_214302\\records.jsonl",
+    "notes": "CSI receiver session. Keep hardware layout and room state stable during capture.",
+    "ended_utc": "2026-05-28T19:46:02+00:00",
+    "lines": 5262
+  }
+}

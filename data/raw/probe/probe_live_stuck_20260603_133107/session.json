@@ -1,0 +1,9 @@
+{
+  "started_utc": "2026-06-03T11:31:07+00:00",
+  "port": "COM3",
+  "baud": 921600,
+  "label": "probe",
+  "raw_log": "data\\raw\\probe\\probe_live_stuck_20260603_133107\\raw_serial.log",
+  "jsonl": "data\\raw\\probe\\probe_live_stuck_20260603_133107\\records.jsonl",
+  "notes": "CSI receiver session. Keep hardware layout and room state stable during capture."
+}

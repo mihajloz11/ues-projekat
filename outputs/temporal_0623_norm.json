@@ -1,0 +1,75 @@
+{
+  "method": "chronological_holdout",
+  "multiclass": false,
+  "train_frac": 0.75,
+  "window_size": 8,
+  "hop": 2,
+  "hidden_size": 32,
+  "epochs": 120,
+  "output_labels": [
+    "empty_room",
+    "person_present"
+  ],
+  "train_windows": 7002,
+  "test_windows": 2336,
+  "binary_accuracy": 0.9953,
+  "per_class": {
+    "empty_room": {
+      "precision": 0.9963,
+      "recall": 0.9902,
+      "f1": 0.9933
+    },
+    "person_present": {
+      "precision": 0.9947,
+      "recall": 0.998,
+      "f1": 0.9964
+    }
+  },
+  "confusion": {
+    "empty_room": {
+      "empty_room": 810,
+      "person_present": 8
+    },
+    "person_present": {
+      "person_present": 1515,
+      "empty_room": 3
+    }
+  },
+  "per_source_label": {
+    "empty_room": {
+      "test_windows": 818,
+      "detected": 0.9902
+    },
+    "person_still": {
+      "test_windows": 739,
+      "detected": 1.0
+    },
+    "walking": {
+      "test_windows": 779,
+      "detected": 0.9961
+    }
+  },
+  "sessions": [
+    {
+      "label": "empty_room",
+      "session": "20260623_224713",
+      "windows": 3270,
+      "train": 2452,
+      "test": 818
+    },
+    {
+      "label": "person_still",
+      "session": "20260623_225427",
+      "windows": 2955,
+      "train": 2216,
+      "test": 739
+    },
+    {
+      "label": "walking",
+      "session": "20260623_225759",
+      "windows": 3113,
+      "train": 2334,
+      "test": 779
+    }
+  ]
+}
