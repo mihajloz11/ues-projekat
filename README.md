@@ -1,8 +1,8 @@
 # UES projekat
 
-Umreženi embedded sistemi
-Mihajlo Živković
-E180/2024
+- Umreženi embedded sistemi
+- Mihajlo Živković
+- E180/2024
 
 Projekat koristi ESP32 kao pošiljalac WiFi paketa i ESP32-S3 kao prijemnik CSI podataka. Na ESP32-S3 pločici se izvršava TinyML model za prepoznavanje prisustva osobe u prostoriji, dok DHT11 i mmWave senzori daju dodatne podatke o stanju prostorije.
 
