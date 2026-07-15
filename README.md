@@ -15,5 +15,4 @@ IoT dio sistema obuhvata MQTT, Node-RED, SQLite i web dashboard. Detekcija prisu
 - `data` – snimljene CSI sesije i obrađeni sažeci podataka.
 - `models` – modeli za prisustvo, kretanje i grubu procjenu zone.
 - `iot` – Node-RED tokovi, MQTT primjer i web interfejsi.
-- `ruview_bridge` – lokalni REST server i dashboard.
 - `outputs` – rezultati evaluacije, grafikoni i tehničke šeme.
