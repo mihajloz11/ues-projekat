@@ -820,7 +820,7 @@ def make_payload(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Pokreće CSI inferenciju uživo za RuView dashboard.")
+    parser = argparse.ArgumentParser(description="Pokreće CSI inferenciju uživo i objavljuje stanje prostorije.")
     parser.add_argument("--port", default="COM3")
     parser.add_argument("--baud", type=int, default=921600)
     parser.add_argument("--model", default="models/zone_csi_centroid.json")
